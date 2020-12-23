@@ -35,9 +35,9 @@ const Home = () => {
             style={{ textDecoration: "none" }}
           >
             <Card
-              title={movie.title}
+              movieTitle={movie.title}
               key={movie.id}
-              image={getImageURL(500, movie.poster_path)}
+              movieImage={getImageURL(500, movie.poster_path)}
             />
           </Link>
         ))}
@@ -51,9 +51,9 @@ const Home = () => {
             style={{ textDecoration: "none" }}
           >
             <Card
-              title={tvshow.name}
+              movieTitle={tvshow.name}
               key={tvshow.id}
-              image={getImageURL(500, tvshow.poster_path)}
+              movieImage={getImageURL(500, tvshow.poster_path)}
             />
           </Link>
         ))}

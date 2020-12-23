@@ -10,4 +10,6 @@ export const getMovieDetails = (id) =>
 export const getTvShowDetails = (id) =>
   `https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=en-US`;
 export const getSearchedItem = (item) =>
-  `${baseUrl}3/search/movie?api_key=${apiKey}&language=en-US&query=${item}&page=1&include_adult=true`;
+  `${baseUrl}3/search/multi?api_key=${apiKey}&language=en-US&query=${item}&page=1&include_adult=false`;
+export const getPersonsImage = (id) =>
+  `https://api.themoviedb.org/3/person/${id}/images?api_key=${apiKey}`;

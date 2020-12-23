@@ -2,12 +2,17 @@ import React from "react";
 //styling and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
+//url
+import { getImageURL } from "../api";
 
-const Card = ({ title, image }) => {
+const Card = ({ movieTitle, movieImage, tvTitle, personImage }) => {
+  console.log(personImage);
   return (
     <StyledMovie>
-      <h1>{title}</h1>
-      <img src={image} alt="" />
+      <h1>{movieTitle}</h1>
+      <h1>{tvTitle}</h1>
+      <img src={movieImage} alt="" />
+      {/* <img src={getImageURL(500, personImage.file_path)} alt="" /> */}
     </StyledMovie>
   );
 };

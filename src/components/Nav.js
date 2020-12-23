@@ -11,20 +11,19 @@ import { getSearchedItem } from "../api";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ setSearched }) => {
   //state
   const [textInput, setTextInput] = useState("");
-  const [searched, setSearched] = useState();
   const inputHandler = (e) => {
     setTextInput(e.target.value);
   };
   const submitSearch = (e) => {
     e.preventDefault();
-    console.log(searched);
+    setTextInput("");
   };
   useEffect(() => {
     axios.get(getSearchedItem(textInput)).then((res) => setSearched(res));
-  }, [submitSearch]);
+  }, []);
 
   return (
     <Navbar>
