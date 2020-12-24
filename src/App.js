@@ -12,10 +12,16 @@ import { Route } from "react-router-dom";
 
 function App() {
   //state
-  const [searched, setSearched] = useState();
+  const [searchedMovie, setSearchedMovie] = useState();
+  const [searchedTv, setSearchedTv] = useState();
+  const [searchedPerson, setSearchedPerson] = useState();
   return (
     <div className="App">
-      <Nav setSearched={setSearched} />
+      <Nav
+        setSearchedMovie={setSearchedMovie}
+        setSearchedTv={setSearchedTv}
+        setSearchedPerson={setSearchedPerson}
+      />
       <GlobalStyles />
       <Route path="/" exact>
         <Home />
@@ -27,7 +33,11 @@ function App() {
         <TvShowDetails />
       </Route>
       <Route path="/searched">
-        <Searched searched={searched} />
+        <Searched
+          searchedMovie={searchedMovie}
+          searchedTv={searchedTv}
+          searchedPerson={searchedPerson}
+        />
       </Route>
     </div>
   );

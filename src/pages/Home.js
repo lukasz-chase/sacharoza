@@ -62,18 +62,15 @@ const Home = () => {
   );
 };
 const StyledMovies = styled(motion.div)`
-  padding: 4rem 5rem;
   h1 {
     text-transform: uppercase;
+    padding: 4rem 0rem;
   }
 `;
 const Movies = styled(motion.div)`
-  min-height: 80vh;
-  padding: 4rem 0rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-column-gap: 3rem;
-  grid-row-gap: 3rem;
+  min-height: 45vh;
+  display: flex;
+  overflow-x: Scroll;
 `;
 
 export default Home;

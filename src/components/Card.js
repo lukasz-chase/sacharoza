@@ -8,8 +8,8 @@ import { getImageURL } from "../api";
 const Card = ({ movieTitle, movieImage, tvTitle, personImage }) => {
   return (
     <StyledMovie>
-      <h1>{movieTitle}</h1>
-      <h1>{tvTitle}</h1>
+      <p>{movieTitle}</p>
+      <p>{tvTitle}</p>
       <img
         src={
           movieImage
@@ -25,12 +25,14 @@ const Card = ({ movieTitle, movieImage, tvTitle, personImage }) => {
 
 const StyledMovie = styled(motion.div)`
   height: 45vh;
+  width: 30vh;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
   border-radius: 1rem;
   overflow: hidden;
   transition: 0.5s ease-in;
-  h1 {
+  margin-right: 1rem;
+  p {
     color: black;
     font-size: 1rem;
   }

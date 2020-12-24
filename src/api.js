@@ -9,7 +9,11 @@ export const getMovieDetails = (id) =>
   `${baseUrl}3/movie/${id}?api_key=${apiKey}&language=en-US`;
 export const getTvShowDetails = (id) =>
   `https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=en-US`;
-export const getSearchedItem = (item) =>
-  `${baseUrl}3/search/multi?api_key=${apiKey}&language=en-US&query=${item}&page=1&include_adult=false`;
+export const getSearchedMovie = (item) =>
+  `${baseUrl}3/search/movie?api_key=${apiKey}&language=en-US&query=${item}&page=1&include_adult=false`;
+export const getSearchedTv = (item) =>
+  `${baseUrl}3/search/tv?api_key=${apiKey}&language=en-US&query=${item}&page=1&include_adult=false`;
+export const getSearchedPerson = (item) =>
+  `${baseUrl}3/search/person?api_key=${apiKey}&language=en-US&query=${item}&page=1&include_adult=false`;
 export const getPersonsImage = (id) =>
   `https://api.themoviedb.org/3/person/${id}/images?api_key=${apiKey}`;
