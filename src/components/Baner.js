@@ -10,7 +10,9 @@ const Baner = () => {
         <h1>
           Welcome to <span>saharoza</span>.
         </h1>
-        <h2>Milions of movies and Tv shows to discover. Explore now </h2>
+        <h2>
+          Milions of movies and Tv shows to discover. <p>Explore now</p>
+        </h2>
       </BanerStyled>
     </BanerComponent>
   );
@@ -46,6 +48,9 @@ const BanerStyled = styled(motion.div)`
 
   span {
     color: #fd980d;
+  }
+  p {
+    color: #e3c607;
   }
 `;
 export default Baner;

@@ -42,12 +42,18 @@ const Home = () => {
       <Baner />
       <ColumnHeader>
         <h1>Trending movies</h1>
-        <button onClick={() => setTrendingMovie(trendingMoviesDay)}>
-          Today
-        </button>
-        <button onClick={() => setTrendingMovie(trendingMoviesWeek)}>
-          This Week
-        </button>
+        <ButtonsStyle>
+          <button onClick={() => setTrendingMovie(trendingMoviesDay)}>
+            Today
+          </button>
+          <button
+            type="button"
+            onClick={() => setTrendingMovie(trendingMoviesWeek)}
+            autofocus
+          >
+            This Week
+          </button>
+        </ButtonsStyle>
       </ColumnHeader>
       <Media>
         {trendingMovie && (
@@ -68,9 +74,15 @@ const Home = () => {
           </>
         )}
       </Media>
-      <h1>trending tv shows:</h1>
-      <button onClick={() => setTrendingTv(trendingTvDay)}>Today</button>
-      <button onClick={() => setTrendingTv(trendingTvWeek)}>This Week</button>
+      <ColumnHeader>
+        <h1>trending tv shows:</h1>
+        <ButtonsStyle>
+          <button onClick={() => setTrendingTv(trendingTvDay)}>Today</button>
+          <button onClick={() => setTrendingTv(trendingTvWeek)}>
+            This Week
+          </button>
+        </ButtonsStyle>
+      </ColumnHeader>
       <Media>
         {trendingTv && (
           <>
@@ -103,9 +115,33 @@ const Media = styled(motion.div)`
 `;
 const ColumnHeader = styled(motion.div)`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    margin-right: 2vh;
+  }
   button {
-    display: inline-block;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0.5rem;
+    background-color: #f7e00c;
+    transition: 0.5s ease-in;
+    &:hover {
+      cursor: pointer;
+    }
+    &:focus {
+      outline: none;
+      background-color: #ed930c;
+    }
   }
 `;
 
+const ButtonsStyle = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  background-color: #f7e00c;
+`;
 export default Home;
