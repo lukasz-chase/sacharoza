@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 //styled
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -6,12 +6,12 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 //import searchedUrl
-import { getSearchedMovie, getSearchedTv, getSearchedPerson } from "../api";
+import { getSearchedMovie, getSearchedTv } from "../api";
 //import axios
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Nav = ({ setSearchedMovie, setSearchedTv, setSearchedPerson }) => {
+const Nav = ({ setSearchedMovie, setSearchedTv }) => {
   //state
   const [textInput, setTextInput] = useState("");
   const inputHandler = (e) => {
@@ -22,7 +22,6 @@ const Nav = ({ setSearchedMovie, setSearchedTv, setSearchedPerson }) => {
     setTextInput("");
     const searchedMovieURL = getSearchedMovie(textInput);
     const searchedTvURL = getSearchedTv(textInput);
-    const searchedPersonURL = getSearchedPerson(textInput);
     axios
       .get(searchedMovieURL)
       .then((res) => setSearchedMovie(res))
@@ -30,10 +29,6 @@ const Nav = ({ setSearchedMovie, setSearchedTv, setSearchedPerson }) => {
     axios
       .get(searchedTvURL)
       .then((res) => setSearchedTv(res))
-      .catch((err) => console.log(err));
-    axios
-      .get(searchedPersonURL)
-      .then((res) => setSearchedPerson(res))
       .catch((err) => console.log(err));
   };
 
@@ -93,6 +88,7 @@ const Navbar = styled(motion.div)`
     text-align: center;
     font-size: 1rem;
     border-radius: 0.5rem;
+    outline: none;
   }
 `;
 const Links = styled(motion.div)``;

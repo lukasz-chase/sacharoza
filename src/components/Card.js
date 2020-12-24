@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 //url
 import { getImageURL } from "../api";
 
-const Card = ({ movieTitle, movieImage, tvTitle, personImage }) => {
+const Card = ({ movieTitle, movieImage, tvTitle }) => {
   return (
     <StyledMovie>
       <p>{movieTitle}</p>
@@ -18,7 +18,6 @@ const Card = ({ movieTitle, movieImage, tvTitle, personImage }) => {
         }
         alt=""
       />
-      {/* <img src={getImageURL(500, personImage.file_path)} alt="" /> */}
     </StyledMovie>
   );
 };
@@ -32,6 +31,7 @@ const StyledMovie = styled(motion.div)`
   overflow: hidden;
   transition: 0.5s ease-in;
   margin-right: 1rem;
+  margin-top: 1rem;
   p {
     color: black;
     font-size: 1rem;

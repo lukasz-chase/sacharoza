@@ -11,6 +11,7 @@ const TvShowDetails = () => {
   //get the current locaiton
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
+  console.log(getTvShowDetails(pathId));
   useEffect(() => {
     axios.get(getTvShowDetails(pathId)).then((res) => setTvShow(res));
   }, []);

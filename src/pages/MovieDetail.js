@@ -14,7 +14,6 @@ const MovieDetail = () => {
   useEffect(() => {
     axios.get(getMovieDetails(pathId)).then((res) => setMovie(res));
   }, []);
-  console.log(movie);
   return (
     <div>
       {movie && (
