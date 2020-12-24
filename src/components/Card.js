@@ -6,12 +6,18 @@ import { motion } from "framer-motion";
 import { getImageURL } from "../api";
 
 const Card = ({ movieTitle, movieImage, tvTitle, personImage }) => {
-  console.log(personImage);
   return (
     <StyledMovie>
       <h1>{movieTitle}</h1>
       <h1>{tvTitle}</h1>
-      <img src={movieImage} alt="" />
+      <img
+        src={
+          movieImage
+            ? getImageURL(500, movieImage)
+            : "https://lh3.googleusercontent.com/proxy/IP4Qp5aL1JqV4IAjdVE8d26ZovGdw-VBmHtt20yRQ8jKm9lGpX8E7MV7-fBFdw_25Hl0FYfTY6kr3sbpTe-VV4BEgfozcgUn3G8KLOF1VIHIzM8EpcpoTrsrAkVsh-x7KFJV"
+        }
+        alt=""
+      />
       {/* <img src={getImageURL(500, personImage.file_path)} alt="" /> */}
     </StyledMovie>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 //getting url
-import { trendingMoviesURL, getImageURL, trendingTvShowsURL } from "../api";
+import { trendingMoviesURL, trendingTvShowsURL } from "../api";
 //importing components
 import Card from "../components/Card";
 //styling and animation
@@ -37,7 +37,7 @@ const Home = () => {
             <Card
               movieTitle={movie.title}
               key={movie.id}
-              movieImage={getImageURL(500, movie.poster_path)}
+              movieImage={movie.poster_path}
             />
           </Link>
         ))}
@@ -53,7 +53,7 @@ const Home = () => {
             <Card
               movieTitle={tvshow.name}
               key={tvshow.id}
-              movieImage={getImageURL(500, tvshow.poster_path)}
+              movieImage={tvshow.poster_path}
             />
           </Link>
         ))}

@@ -20,10 +20,12 @@ const Nav = ({ setSearched }) => {
   const submitSearch = (e) => {
     e.preventDefault();
     setTextInput("");
+    const searchedURL = getSearchedItem(textInput);
+    axios
+      .get(searchedURL)
+      .then((res) => setSearched(res))
+      .catch((err) => console.log(err));
   };
-  useEffect(() => {
-    axios.get(getSearchedItem(textInput)).then((res) => setSearched(res));
-  }, []);
 
   return (
     <Navbar>
@@ -32,13 +34,13 @@ const Nav = ({ setSearched }) => {
       </Link>
       <RightNav>
         <Links>
-          <a href="">Movies</a>
+          <Link to="/movies">Movies</Link>
           {/* <div className="dropdown">
               <button>Trending</button>
               <button>In Theather</button>
               <button></button>
           </div> */}
-          <a href="">TvShows</a>
+          <Link to="/tvshows">TvShows</Link>
         </Links>
         <form>
           <input
