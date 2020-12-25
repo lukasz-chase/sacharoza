@@ -5,6 +5,7 @@ import MovieDetail from "./pages/MovieDetail";
 import TvShowDetails from "./pages/TvShowDetails";
 import Nav from "./components/Nav";
 import Searched from "./pages/Searched";
+import Footer from "./components/Footer";
 //Styles
 import GlobalStyles from "./components/GlobalStyles";
 //Router
@@ -30,6 +31,7 @@ function App() {
       <Route path="/searched">
         <Searched searchedMovie={searchedMovie} searchedTv={searchedTv} />
       </Route>
+      <Footer />
     </div>
   );
 }

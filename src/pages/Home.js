@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 //getting url
 import { getTrendingMedia } from "../api";
@@ -37,19 +37,51 @@ const Home = () => {
     setTrendingMovie(trendingMoviesWeek);
     setTrendingTv(trendingTvWeek);
   }, [trendingMoviesWeek, trendingTvWeek]);
+  //Event handlers
+  const button1Ref = useRef(null);
+  const button2Ref = useRef(null);
+  const button3Ref = useRef(null);
+  const button4Ref = useRef(null);
+  const trendingMovieHandler = (currentBtn, setTrend, whichTrend) => {
+    button1Ref.current.classList.remove("active");
+    button2Ref.current.classList.remove("active");
+    currentBtn.current.classList.add("active");
+    setTrend(whichTrend);
+  };
+  const trendingTvHandler = (currentBtn, setTrend, whichTrend) => {
+    button3Ref.current.classList.remove("active");
+    button4Ref.current.classList.remove("active");
+    currentBtn.current.classList.add("active");
+    setTrend(whichTrend);
+  };
   return (
     <StyledHome>
       <Baner />
       <ColumnHeader>
         <h1>Trending movies</h1>
         <ButtonsStyle>
-          <button onClick={() => setTrendingMovie(trendingMoviesDay)}>
+          <button
+            ref={button1Ref}
+            onClick={() =>
+              trendingMovieHandler(
+                button1Ref,
+                setTrendingMovie,
+                trendingMoviesDay
+              )
+            }
+          >
             Today
           </button>
           <button
-            type="button"
-            onClick={() => setTrendingMovie(trendingMoviesWeek)}
-            autofocus
+            ref={button2Ref}
+            className="active"
+            onClick={() =>
+              trendingMovieHandler(
+                button2Ref,
+                setTrendingMovie,
+                trendingMoviesWeek
+              )
+            }
           >
             This Week
           </button>
@@ -77,8 +109,21 @@ const Home = () => {
       <ColumnHeader>
         <h1>trending tv shows:</h1>
         <ButtonsStyle>
-          <button onClick={() => setTrendingTv(trendingTvDay)}>Today</button>
-          <button onClick={() => setTrendingTv(trendingTvWeek)}>
+          <button
+            ref={button3Ref}
+            onClick={() =>
+              trendingTvHandler(button3Ref, setTrendingTv, trendingTvDay)
+            }
+          >
+            Today
+          </button>
+          <button
+            ref={button4Ref}
+            className="active"
+            onClick={() =>
+              trendingTvHandler(button4Ref, setTrendingTv, trendingTvWeek)
+            }
+          >
             This Week
           </button>
         </ButtonsStyle>
@@ -125,15 +170,17 @@ const ColumnHeader = styled(motion.div)`
     border-radius: 1rem;
     padding: 1rem;
     margin: 0.5rem;
-    background-color: #f7e00c;
     transition: 0.5s ease-in;
     &:hover {
       cursor: pointer;
     }
     &:focus {
       outline: none;
-      background-color: #ed930c;
     }
+  }
+  .active {
+    outline: none;
+    background-color: #ed930c;
   }
 `;
 
@@ -142,6 +189,5 @@ const ButtonsStyle = styled(motion.div)`
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  background-color: #f7e00c;
 `;
 export default Home;
