@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { getTvShowDetails, getImageURL } from "../api";
+import { getMediaDetails, getImageURL } from "../api";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
@@ -11,9 +11,8 @@ const TvShowDetails = () => {
   //get the current locaiton
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
-  console.log(getTvShowDetails(pathId));
   useEffect(() => {
-    axios.get(getTvShowDetails(pathId)).then((res) => setTvShow(res));
+    axios.get(getMediaDetails("tv", pathId)).then((res) => setTvShow(res));
   }, []);
   console.log(tvshow);
   return (

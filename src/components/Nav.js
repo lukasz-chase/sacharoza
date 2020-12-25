@@ -35,7 +35,7 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
   return (
     <Navbar>
       <Link to="/">
-        <h1>saharoza</h1>
+        <h1>sacharoza</h1>
       </Link>
       <RightNav>
         <Links>

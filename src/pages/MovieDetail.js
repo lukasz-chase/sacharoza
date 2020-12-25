@@ -7,26 +7,28 @@ import { motion } from "framer-motion";
 //import axios
 import axios from "axios";
 //import url
-import { getMovieDetails, getImageURL } from "../api";
+import { getMediaDetails, getImageURL, getMediaCredits } from "../api";
 //import components
 import MediaBaner from "../components/MediaBaner";
 
 const MovieDetail = () => {
   // state;
   const [movie, setMovie] = useState(null);
-  const [genres, setGenres] = useState({});
-  //get the current locaiton
+  const [credits, setCredits] = useState(null);
+  //get the current location
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
+  //get apis response
   useEffect(() => {
-    axios.get(getMovieDetails(pathId)).then((res) => setMovie(res));
+    axios.get(getMediaDetails("movie", pathId)).then((res) => setMovie(res));
+    axios.get(getMediaCredits("movie", pathId)).then((res) => setCredits(res));
   }, []);
-  // console.log();
   return (
     <div>
       {movie && (
         <Details>
           <MediaBaner
+            movie={movie}
             image={getImageURL(500, movie.data.poster_path)}
             title={movie.data.title}
             date={movie.data.release_date}

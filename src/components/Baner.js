@@ -8,7 +8,7 @@ const Baner = () => {
     <BanerComponent>
       <BanerStyled>
         <h1>
-          Welcome to <span>saharoza</span>.
+          Welcome to <span>sacharoza</span>.
         </h1>
         <h2>
           Milions of movies and Tv shows to discover. <p>Explore now</p>
