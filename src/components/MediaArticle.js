@@ -8,13 +8,13 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 //link
 import { Link } from "react-router-dom";
 
-const MediaArticle = ({ budget, revenue, cast }) => {
+const MediaArticle = ({ budget, revenue, cast, status, language }) => {
   return (
     <ArticleComponent>
       <h1>Cast</h1>
       <ArticleLeft>
         <div className="cast">
-          {cast.slice(0, 9).map((person) => (
+          {cast.slice(0, 7).map((person) => (
             <Cast key={person.original_name}>
               <p>{person.original_name}</p>
               <p>{person.character}</p>
@@ -37,6 +37,14 @@ const MediaArticle = ({ budget, revenue, cast }) => {
           <p>Revenue</p>
           <p className="value">${revenue.toLocaleString()}</p>
         </Item>
+        <Item>
+          <p>status</p>
+          <p className="value">{status}</p>
+        </Item>
+        <Item>
+          <p>Original language</p>
+          <p className="value">{language}</p>
+        </Item>
       </ArticleRight>
     </ArticleComponent>
   );
@@ -54,9 +62,10 @@ const ArticleLeft = styled(motion.div)`
   justify-content: center;
   align-items: center;
   padding: 2rem 5rem;
-  overflow-x: scroll;
+  flex-wrap: wrap;
   .cast {
     display: flex;
+    flex-wrap: wrap;
   }
 `;
 const ArticleRight = styled(motion.div)`
@@ -67,6 +76,7 @@ const ArticleRight = styled(motion.div)`
 `;
 
 const Cast = styled(motion.div)`
+  height: 15vh;
   width: 25vh;
   text-align: center;
   border-radius: 1rem;
@@ -76,9 +86,6 @@ const Cast = styled(motion.div)`
   margin-top: 1rem;
   p {
     color: black;
-  }
-  &:hover {
-    background-color: #fac601;
   }
 `;
 const Item = styled(motion.div)`
