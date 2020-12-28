@@ -2,9 +2,9 @@ import React from "react";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
-//import icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDotCircle } from "@fortawesome/free-solid-svg-icons";
+//Star images
+import starEmpty from "../img/star-empty.png";
+import starFull from "../img/star-full.png";
 
 const MediaBaner = ({
   image,
@@ -13,11 +13,25 @@ const MediaBaner = ({
   year,
   genres,
   overview,
-  budget,
-  revenue,
   runtime,
   rating,
+  tagline,
+  screenplay,
+  director,
 }) => {
+  //Get stars
+  const getStars = () => {
+    const stars = [];
+    const ratingStars = Math.floor(rating);
+    for (let i = 1; i <= 10; i++) {
+      if (i <= ratingStars) {
+        stars.push(<img alt="star" key={i} src={starFull} />);
+      } else {
+        stars.push(<img alt="star" key={i} src={starEmpty} />);
+      }
+    }
+    return stars;
+  };
   return (
     <MediaBanerComponent>
       <Poster>
@@ -35,11 +49,27 @@ const MediaBaner = ({
           ))}
           <span>{runtime} min</span>
         </UnderTitle>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        {/* <p>Budget {budget}</p>
-        <p>revenue {revenue}</p>
-        <p>rating {rating}</p> */}
+        <div className="rating">
+          <p>Rating: {rating}</p>
+          {getStars()}
+        </div>
+        <Overview>
+          <h4>{tagline}</h4>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+        </Overview>
+        <Crew>
+          {director.map((person) => (
+            <span key={person.original_name}>
+              {person.original_name}-{person.job}
+            </span>
+          ))}
+          {screenplay.slice(1).map((person) => (
+            <span key={person.original_name}>
+              {person.original_name}-{person.job}
+            </span>
+          ))}
+        </Crew>
       </SmallDetails>
     </MediaBanerComponent>
   );
@@ -48,14 +78,24 @@ const MediaBanerComponent = styled(motion.div)`
   display: flex;
   width: 100%;
   background-color: #f2c366;
+  .rating {
+    padding: 1rem 0rem;
+    display: flex;
+    p {
+      display: flex;
+      padding: 0rem 0.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `;
 const Poster = styled(motion.div)`
-  width: 30%;
+  width: 35%;
   display: flex;
   justify-content: flex-end;
   padding: 7rem 0rem;
   img {
-    height: 45vh;
+    height: 48vh;
     width: 30vh;
     object-fit: cover;
   }
@@ -65,8 +105,8 @@ const SmallDetails = styled(motion.div)`
   align-items: left;
   justify-content: center;
   flex-direction: column;
-  width: 70%;
-  padding: 7rem 2rem;
+  width: 55%;
+  padding: 1rem 2rem;
   h1 {
     font-size: 3rem;
     font-weight: bold;
@@ -77,11 +117,26 @@ const UnderTitle = styled(motion.div)`
   font-size: 1rem;
   font-weight: lighter;
   padding: 0rem 3rem;
-  span {
-    padding: 0rem 1rem;
-  }
   h4 {
     font-weight: lighter;
   }
 `;
+const Overview = styled(motion.div)`
+  padding: 1rem 0rem;
+  h4 {
+    padding: 1rem 0rem;
+    font-style: italic;
+  }
+`;
+const Crew = styled(motion.div)`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  span {
+    padding: 0rem 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 export default MediaBaner;
