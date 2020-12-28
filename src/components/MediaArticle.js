@@ -1,34 +1,44 @@
-import React from "react";
+import React, { useRef } from "react";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-//link
-import { Link } from "react-router-dom";
+//url
+import { getImageURL } from "../api";
+//Components
+import Credits from "../components/Credits";
 
-const MediaArticle = ({ budget, revenue, cast, status, language }) => {
+const MediaArticle = ({ budget, revenue, cast, status, language, crew }) => {
+  const creditsContainer = useRef(null);
+  const openCredits = () => {
+    creditsContainer.current.style.display = "block";
+  };
   return (
     <ArticleComponent>
       <h1>Cast</h1>
       <ArticleLeft>
         <div className="cast">
-          {cast.slice(0, 7).map((person) => (
+          {cast.slice(0, 10).map((person) => (
             <Cast key={person.original_name}>
+              <img src={getImageURL(500, person.profile_path)} alt="" />
               <p>{person.original_name}</p>
               <p>{person.character}</p>
             </Cast>
           ))}
-          <Link to="/movie/id/cast">
-            <FontAwesomeIcon
-              icon={faArrowRight}
-              style={{ fontSize: "3rem", color: "black" }}
-            />
-          </Link>
+          <FontAwesomeIcon
+            onClick={openCredits}
+            icon={faArrowRight}
+            className="arrow"
+          />
         </div>
       </ArticleLeft>
       <ArticleRight>
+        <Item>
+          <p>Status</p>
+          <p className="value">{status}</p>
+        </Item>
         <Item>
           <p>Budget</p>
           <p className="value">${budget.toLocaleString()}</p>
@@ -38,14 +48,11 @@ const MediaArticle = ({ budget, revenue, cast, status, language }) => {
           <p className="value">${revenue.toLocaleString()}</p>
         </Item>
         <Item>
-          <p>status</p>
-          <p className="value">{status}</p>
-        </Item>
-        <Item>
           <p>Original language</p>
           <p className="value">{language}</p>
         </Item>
       </ArticleRight>
+      <Credits crew={crew} cast={cast} creditsContainer={creditsContainer} />
     </ArticleComponent>
   );
 };
@@ -53,19 +60,25 @@ const ArticleComponent = styled(motion.div)`
   display: flex;
   h1 {
     padding: 1rem;
-    align-self: center;
   }
 `;
 const ArticleLeft = styled(motion.div)`
   width: 70%;
+  height: 39vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 5rem;
-  flex-wrap: wrap;
+  padding: 2rem 0rem;
+  overflow-x: scroll;
+  overflow-y: hidden;
   .cast {
     display: flex;
-    flex-wrap: wrap;
+  }
+  .arrow {
+    color: black;
+    font-size: 7rem;
+    margin-top: 5rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 const ArticleRight = styled(motion.div)`
@@ -76,8 +89,8 @@ const ArticleRight = styled(motion.div)`
 `;
 
 const Cast = styled(motion.div)`
-  height: 15vh;
-  width: 25vh;
+  min-height: 25vh;
+  width: 15vh;
   text-align: center;
   border-radius: 1rem;
   overflow: hidden;
@@ -86,6 +99,11 @@ const Cast = styled(motion.div)`
   margin-top: 1rem;
   p {
     color: black;
+  }
+  img {
+    height: 20vh;
+    width: 15vh;
+    object-fit: cover;
   }
 `;
 const Item = styled(motion.div)`

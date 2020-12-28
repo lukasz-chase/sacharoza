@@ -15,7 +15,6 @@ const Footer = () => {
       <ul>
         <li>zaangazuj sie</li>
         <li>Aplikacje innych firm</li>
-        <li>Aplikacje innych firm</li>
         <li>Dodaj nowy film</li>
         <li>Dodaj nowy serial</li>
       </ul>

@@ -71,11 +71,6 @@ const ResultContainer = styled(motion.div)`
 const ResultList = styled(motion.div)`
   min-height: 30vh;
   padding: 0vh 2vh;
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  padding: 0rem 1rem;
-  grid-column-gap: 2rem;
-  grid-row-gap: 3rem; */
   display: flex;
   flex-wrap: wrap;
   overflow-x: hidden;

@@ -25,7 +25,7 @@ function App() {
       <Route path="/movie/:id">
         <MovieDetail />
       </Route>
-      <Route path="/tvshow/:id">
+      <Route path="/tvshow/:id" exact>
         <TvShowDetails />
       </Route>
       <Route path="/searched">

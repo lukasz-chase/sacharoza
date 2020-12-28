@@ -24,8 +24,6 @@ const MovieDetail = () => {
     axios.get(getMediaDetails("movie", pathId)).then((res) => setMovie(res));
     axios.get(getMediaCredits("movie", pathId)).then((res) => setCredits(res));
   }, []);
-  // console.log(movie);
-  console.log(credits);
   return (
     <div>
       {
@@ -51,9 +49,11 @@ const MovieDetail = () => {
               )}
             />
             <MediaArticle
+              id={pathId}
               budget={movie.data.budget}
               revenue={movie.data.revenue}
               cast={credits.data.cast}
+              crew={credits.data.crew}
               status={movie.data.status}
               language={movie.data.original_language}
             />

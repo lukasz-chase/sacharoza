@@ -61,12 +61,14 @@ const MediaBaner = ({
         <Crew>
           {director.map((person) => (
             <span key={person.original_name}>
-              {person.original_name}-{person.job}
+              <p className="name">{person.original_name}</p>
+              <p>{person.job}</p>
             </span>
           ))}
           {screenplay.slice(1).map((person) => (
             <span key={person.original_name}>
-              {person.original_name}-{person.job}
+              <p className="name">{person.original_name}</p>
+              <p>{person.job}</p>
             </span>
           ))}
         </Crew>
@@ -130,12 +132,13 @@ const Overview = styled(motion.div)`
 `;
 const Crew = styled(motion.div)`
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  span {
-    padding: 0rem 1rem;
-    display: flex;
-    flex-direction: column;
+  .name {
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  p {
+    margin-right: 1rem;
   }
 `;
 
