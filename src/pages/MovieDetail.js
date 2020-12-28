@@ -16,14 +16,21 @@ const MovieDetail = () => {
   // state;
   const [movie, setMovie] = useState(null);
   const [credits, setCredits] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   //get the current location
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
   //get apis response
   useEffect(() => {
-    axios.get(getMediaDetails("movie", pathId)).then((res) => setMovie(res));
+    axios.get(getMediaDetails("movie", pathId)).then((res) => {
+      setMovie(res);
+      setLoading(false);
+    });
     axios.get(getMediaCredits("movie", pathId)).then((res) => setCredits(res));
   }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
       {
