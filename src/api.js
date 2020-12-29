@@ -16,4 +16,4 @@ export const getSearchedTv = (item) =>
 export const getPersonsImage = (id) =>
   `${baseUrl}3/person/${id}/images?apki_key=${apiKey}`;
 export const getMediaVideo = (media, id) =>
-  `${baseUrl}/3/${media}/${id}/videos?api_key=${apiKey}&language=en-US`;
+  `${baseUrl}3/${media}/${id}/videos?api_key=${apiKey}&language=en-US`;
