@@ -7,7 +7,12 @@ import { motion } from "framer-motion";
 //import axios
 import axios from "axios";
 //import url
-import { getMediaDetails, getImageURL, getMediaCredits } from "../api";
+import {
+  getMediaDetails,
+  getImageURL,
+  getMediaCredits,
+  getMediaVideo,
+} from "../api";
 //import components
 import MediaBaner from "../components/MediaBaner";
 import MediaArticle from "../components/MediaArticle";
@@ -22,12 +27,18 @@ const MovieDetail = () => {
   const pathId = location.pathname.split("/")[2];
   //get apis response
   useEffect(() => {
-    axios.get(getMediaDetails("movie", pathId)).then((res) => {
-      setMovie(res);
-      setLoading(false);
-    });
-    axios.get(getMediaCredits("movie", pathId)).then((res) => setCredits(res));
-  }, []);
+    axios
+      .get(getMediaDetails("movie", pathId))
+      .then((res) => {
+        setMovie(res);
+        setLoading(false);
+      })
+      .catch((err) => `${console.log(err)} movie`);
+    axios
+      .get(getMediaCredits("movie", pathId))
+      .then((res) => setCredits(res))
+      .catch((err) => `${console.log(err)} credits`);
+  }, [pathId]);
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -35,7 +46,8 @@ const MovieDetail = () => {
     <div>
       {
         (movie,
-        credits && (
+        credits,
+        videos && (
           <Details>
             <MediaBaner
               movie={movie}
