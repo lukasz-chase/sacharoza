@@ -17,3 +17,5 @@ export const getPersonsImage = (id) =>
   `${baseUrl}3/person/${id}/images?apki_key=${apiKey}`;
 export const getMediaVideo = (media, id) =>
   `${baseUrl}3/${media}/${id}/videos?api_key=${apiKey}&language=en-US`;
+export const getSimilarMedia = (media, id) =>
+  `${baseUrl}3/${media}/${id}/similar?api_key=${apiKey}&language=en-US&page=1`;

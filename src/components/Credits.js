@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const Credits = ({ cast, crew, creditsContainer }) => {
+  //Handlers
   const closeCredits = (e) => {
     const element = e.target;
     if (element.classList.contains("credits")) {

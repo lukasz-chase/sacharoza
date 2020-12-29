@@ -6,7 +6,9 @@ import { motion } from "framer-motion";
 import Toggle from "./Toggle";
 
 const Trailers = ({ movieVideos }) => {
+  //State
   const [officialTrailer, setOfficialTrailer] = useState(null);
+  //setting state
   useEffect(() => {
     setOfficialTrailer(
       movieVideos.data.results.filter((video) =>
@@ -14,7 +16,6 @@ const Trailers = ({ movieVideos }) => {
       )
     );
   }, [movieVideos.data.results]);
-  console.log(movieVideos.data.results);
   return (
     <div>
       {officialTrailer && (
@@ -24,8 +25,8 @@ const Trailers = ({ movieVideos }) => {
             <p key={video.id}>
               <iframe
                 title={video.id}
-                width="560"
-                height="315"
+                width="1100"
+                height="565"
                 src={`https://www.youtube.com/embed/${video.key}`}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

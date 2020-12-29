@@ -12,18 +12,19 @@ import {
   getImageURL,
   getMediaCredits,
   getMediaVideo,
+  getSimilarMedia,
 } from "../api";
 //import components
 import MediaBaner from "../components/MediaBaner";
 import MediaArticle from "../components/MediaArticle";
 import Trailers from "../components/Trailers";
+import Similar from "../components/Similar";
 
 const MovieDetail = () => {
   // state
   const [movie, setMovie] = useState(null);
   const [credits, setCredits] = useState(null);
   const [videos, setVideos] = useState(null);
-  const [isLoading, setLoading] = useState(true);
   //get the current location
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
@@ -41,23 +42,14 @@ const MovieDetail = () => {
       .catch((err) => `${console.log(err)} credits`);
     axios
       .get(getMediaVideo("movie", pathId))
-      .then((res) => {
-        setVideos(res);
-        setLoading(false);
-      })
+      .then((res) => setVideos(res))
       .catch((err) => `${console.log(err)} video`);
   }, [pathId]);
-  //checking if the data loaded
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
   return (
     <div>
-      {
-        (movie,
-        credits,
-        videos && (
-          <Details>
+      <Details>
+        {movie && credits ? (
+          <>
             <MediaBaner
               movie={movie}
               image={
@@ -89,10 +81,33 @@ const MovieDetail = () => {
               status={movie.data.status}
               language={movie.data.original_language}
             />
-            <Trailers movieVideos={videos} />
-          </Details>
-        ))
-      }
+          </>
+        ) : (
+          <iframe
+            title="gihpy-embed"
+            src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40"
+            width="480"
+            height="480"
+            frameBorder="0"
+            className="giphy-embed"
+            allowFullScreen
+          ></iframe>
+        )}
+        {videos ? (
+          <Trailers movieVideos={videos} />
+        ) : (
+          <iframe
+            title="gihpy-embed"
+            src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40"
+            width="480"
+            height="480"
+            frameBorder="0"
+            className="giphy-embed"
+            allowFullScreen
+          ></iframe>
+        )}
+        <Similar id={pathId} />
+      </Details>
     </div>
   );
 };

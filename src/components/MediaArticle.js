@@ -66,38 +66,44 @@ const MediaArticle = ({ budget, revenue, cast, status, language, crew }) => {
 const ArticleComponent = styled(motion.div)`
   display: flex;
   h1 {
-    padding: 1rem;
+    position: absolute;
+    left: 50%;
+    margin-left: -3vh;
+    margin-top: 2rem;
   }
 `;
 const ArticleLeft = styled(motion.div)`
-  width: 70%;
-  height: 39vh;
+  width: 85%;
+  height: 48vh;
   display: flex;
   padding: 2rem 0rem;
   overflow-x: scroll;
   overflow-y: hidden;
+  margin-left: 1rem;
+  margin-top: 5rem;
   .cast {
     display: flex;
   }
   .arrow {
     color: black;
     font-size: 7rem;
-    margin-top: 5rem;
+    display: flex;
+    align-self: center;
     &:hover {
       cursor: pointer;
     }
   }
 `;
 const ArticleRight = styled(motion.div)`
-  width: 20%;
+  width: 15%;
   display: flex;
   flex-direction: column;
-  padding: 0rem 1rem;
+  padding: 2rem 2rem;
 `;
 
 const Cast = styled(motion.div)`
-  min-height: 25vh;
-  width: 15vh;
+  min-height: 30vh;
+  width: 20vh;
   text-align: center;
   border-radius: 1rem;
   overflow: hidden;
@@ -108,19 +114,20 @@ const Cast = styled(motion.div)`
     color: black;
   }
   img {
-    height: 20vh;
-    width: 15vh;
+    height: 30vh;
+    width: 20vh;
     object-fit: cover;
   }
 `;
 const Item = styled(motion.div)`
   padding: 1rem 0rem;
   p {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
   }
   .value {
     font-weight: lighter;
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 `;
 export default MediaArticle;
