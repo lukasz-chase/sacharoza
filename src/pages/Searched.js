@@ -19,7 +19,7 @@ const Searched = ({ searchedMovie, searchedTv }) => {
     <ResultContainer>
       <h1>{movies && movies.length} Movies</h1>
       {movies && (
-        <Toggle>
+        <Toggle state={false}>
           <ResultList>
             {movies.map((item) => (
               <Link
@@ -39,7 +39,7 @@ const Searched = ({ searchedMovie, searchedTv }) => {
       )}
       <h1>{tvshows && tvshows.length} Tv shows</h1>
       {tvshows && (
-        <Toggle>
+        <Toggle state={false}>
           <ResultList>
             {tvshows.map((item) => (
               <Link
