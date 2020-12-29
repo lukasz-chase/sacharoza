@@ -13,8 +13,7 @@ const TvShowDetails = () => {
   const pathId = location.pathname.split("/")[2];
   useEffect(() => {
     axios.get(getMediaDetails("tv", pathId)).then((res) => setTvShow(res));
-  }, []);
-  console.log(tvshow);
+  }, [pathId]);
   return (
     <div>
       {tvshow && (

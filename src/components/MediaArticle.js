@@ -22,7 +22,14 @@ const MediaArticle = ({ budget, revenue, cast, status, language, crew }) => {
         <div className="cast">
           {cast.slice(0, 10).map((person) => (
             <Cast key={person.original_name}>
-              <img src={getImageURL(500, person.profile_path)} alt="" />
+              <img
+                src={
+                  person.profile_path
+                    ? getImageURL(500, person.profile_path)
+                    : "https://piotrkowalski.pw/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png"
+                }
+                alt=""
+              />
               <p>{person.original_name}</p>
               <p>{person.character}</p>
             </Cast>

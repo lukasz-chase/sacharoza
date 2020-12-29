@@ -14,7 +14,7 @@ const Card = ({ movieTitle, movieImage, tvTitle }) => {
         src={
           movieImage
             ? getImageURL(500, movieImage)
-            : "https://lh3.googleusercontent.com/proxy/IP4Qp5aL1JqV4IAjdVE8d26ZovGdw-VBmHtt20yRQ8jKm9lGpX8E7MV7-fBFdw_25Hl0FYfTY6kr3sbpTe-VV4BEgfozcgUn3G8KLOF1VIHIzM8EpcpoTrsrAkVsh-x7KFJV"
+            : "https://piotrkowalski.pw/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png"
         }
         alt=""
       />

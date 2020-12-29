@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
-const Toggle = ({ children }) => {
-  const [toggle, setToggle] = useState(false);
+const Toggle = ({ children, state }) => {
+  const [toggle, setToggle] = useState(state);
   return (
     <ToggleContainer onClick={() => setToggle(!toggle)}>
       {toggle ? (
