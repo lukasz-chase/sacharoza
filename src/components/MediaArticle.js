@@ -10,7 +10,16 @@ import { getImageURL } from "../api";
 //Components
 import Credits from "../components/Credits";
 
-const MediaArticle = ({ budget, revenue, cast, status, language, crew }) => {
+const MediaArticle = ({
+  budget,
+  revenue,
+  cast,
+  status,
+  language,
+  crew,
+  episodes,
+  seasons,
+}) => {
   const creditsContainer = useRef(null);
   const openCredits = () => {
     creditsContainer.current.style.display = "block";
@@ -46,14 +55,28 @@ const MediaArticle = ({ budget, revenue, cast, status, language, crew }) => {
           <p>Status</p>
           <p className="value">{status}</p>
         </Item>
-        <Item>
-          <p>Budget</p>
-          <p className="value">${budget.toLocaleString()}</p>
-        </Item>
-        <Item>
-          <p>Revenue</p>
-          <p className="value">${revenue.toLocaleString()}</p>
-        </Item>
+        {budget ? (
+          <Item>
+            <p>Budget</p>
+            <p className="value">${budget.toLocaleString()}</p>
+          </Item>
+        ) : (
+          <Item>
+            <p>seasons</p>
+            <p className="value">{seasons}</p>
+          </Item>
+        )}
+        {revenue ? (
+          <Item>
+            <p>Revenue</p>
+            <p className="value">${revenue.toLocaleString()}</p>
+          </Item>
+        ) : (
+          <Item>
+            <p>Episodes</p>
+            <p className="value">{episodes}</p>
+          </Item>
+        )}
         <Item>
           <p>Original language</p>
           <p className="value">{language}</p>

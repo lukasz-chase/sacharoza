@@ -9,6 +9,8 @@ export const getMediaDetails = (media, id) =>
   `${baseUrl}3/${media}/${id}?api_key=${apiKey}&language=en-US`;
 export const getMediaCredits = (media, id) =>
   `${baseUrl}3/${media}/${id}/credits?api_key=${apiKey}&language=en-US`;
+export const getTvCredits = (media, id) =>
+  `${baseUrl}3/${media}/${id}/aggregate_credits?api_key=${apiKey}&language=en-US`;
 export const getSearchedMovie = (item) =>
   `${baseUrl}3/search/movie?api_key=${apiKey}&language=en-US&query=${item}&page=1&include_adult=false`;
 export const getSearchedTv = (item) =>

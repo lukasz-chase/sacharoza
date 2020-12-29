@@ -42,12 +42,11 @@ const MediaBaner = ({
           {title} ({year})
         </h1>
         <UnderTitle>
-          <span>{date}</span>
-          <span>-</span>
+          <span className="date">{date}</span>
           {genres.map((genre) => (
-            <h4 key={genre.name}>{genre.name} -</h4>
+            <h4 key={genre.name}>{genre.name}</h4>
           ))}
-          <span>{runtime} min</span>
+          <span>{runtime ? `${runtime}min` : ""} </span>
         </UnderTitle>
         <div className="rating">
           <p>Rating: {rating}</p>
@@ -117,8 +116,12 @@ const UnderTitle = styled(motion.div)`
   display: flex;
   font-size: 1rem;
   font-weight: lighter;
+  .date {
+    margin-right: 1vh;
+  }
   h4 {
     font-weight: lighter;
+    margin-right: 1vh;
   }
 `;
 const Overview = styled(motion.div)`

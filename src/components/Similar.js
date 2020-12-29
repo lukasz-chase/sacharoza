@@ -8,20 +8,21 @@ import axios from "axios";
 import { getSimilarMedia, getImageURL } from "../api";
 //import link
 import { Link } from "react-router-dom";
-const Similar = ({ id }) => {
+const Similar = ({ media, id }) => {
   //state
   const [similar, setSimilar] = useState(null);
   //use Effect
   useEffect(() => {
     axios
-      .get(getSimilarMedia("movie", id))
+      .get(getSimilarMedia(media, id))
       .then((res) => setSimilar(res))
       .catch((err) => `${console.log(err)} video`);
   }, [id]);
+  console.log(similar);
   return (
     <SimilarComponent>
       <Media>
-        <h1>Similar Movies</h1>
+        <h1>Similar {media}</h1>
         {similar ? (
           <ItemsComponent>
             {similar.data.results.map((item) => (

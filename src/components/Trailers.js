@@ -4,40 +4,46 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 //import component
 import Toggle from "./Toggle";
+//import axios
+import axios from "axios";
+//import url
+import { getMediaVideo } from "../api";
 
-const Trailers = ({ movieVideos }) => {
+const Trailers = ({ id, media }) => {
   //State
-  const [officialTrailer, setOfficialTrailer] = useState(null);
+  const [videos, setVideos] = useState(null);
   //setting state
   useEffect(() => {
-    setOfficialTrailer(
-      movieVideos.data.results.filter((video) =>
-        video.name.includes("Official Trailer")
-      )
-    );
-  }, [movieVideos.data.results]);
+    axios
+      .get(getMediaVideo(media, id))
+      .then((res) => setVideos(res))
+      .catch((err) => `${console.log(err)} video`);
+  }, [id]);
+  console.log(videos);
   return (
     <div>
-      {officialTrailer && (
+      {videos && (
         <TrailersComponent>
           <h1>Official Trailer</h1>
-          {officialTrailer.map((video) => (
-            <p key={video.id}>
-              <iframe
-                title={video.id}
-                width="1100"
-                height="565"
-                src={`https://www.youtube.com/embed/${video.key}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </p>
-          ))}
-          <h1>{movieVideos.data.results.length > 1 ? "Videos" : ""}</h1>
+          {videos.data.results
+            .filter((video) => video.name.includes("Official"))
+            .map((video) => (
+              <p key={video.id}>
+                <iframe
+                  title={video.id}
+                  width="1100"
+                  height="565"
+                  src={`https://www.youtube.com/embed/${video.key}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </p>
+            ))}
+          <h1>{videos.data.results.length > 1 ? "Videos" : ""}</h1>
           <Toggle state={true}>
             <VideosComponent>
-              {movieVideos.data.results.slice(1).map((video) => (
+              {videos.data.results.slice(1).map((video) => (
                 <p key={video.id}>
                   <iframe
                     className="videosClass"

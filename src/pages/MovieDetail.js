@@ -7,13 +7,7 @@ import { motion } from "framer-motion";
 //import axios
 import axios from "axios";
 //import url
-import {
-  getMediaDetails,
-  getImageURL,
-  getMediaCredits,
-  getMediaVideo,
-  getSimilarMedia,
-} from "../api";
+import { getMediaDetails, getImageURL, getMediaCredits } from "../api";
 //import components
 import MediaBaner from "../components/MediaBaner";
 import MediaArticle from "../components/MediaArticle";
@@ -24,7 +18,6 @@ const MovieDetail = () => {
   // state
   const [movie, setMovie] = useState(null);
   const [credits, setCredits] = useState(null);
-  const [videos, setVideos] = useState(null);
   //get the current location
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
@@ -32,18 +25,12 @@ const MovieDetail = () => {
   useEffect(() => {
     axios
       .get(getMediaDetails("movie", pathId))
-      .then((res) => {
-        setMovie(res);
-      })
+      .then((res) => setMovie(res))
       .catch((err) => `${console.log(err)} movie`);
     axios
       .get(getMediaCredits("movie", pathId))
       .then((res) => setCredits(res))
       .catch((err) => `${console.log(err)} credits`);
-    axios
-      .get(getMediaVideo("movie", pathId))
-      .then((res) => setVideos(res))
-      .catch((err) => `${console.log(err)} video`);
   }, [pathId]);
   return (
     <div>
@@ -93,20 +80,8 @@ const MovieDetail = () => {
             allowFullScreen
           ></iframe>
         )}
-        {videos ? (
-          <Trailers movieVideos={videos} />
-        ) : (
-          <iframe
-            title="gihpy-embed"
-            src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40"
-            width="480"
-            height="480"
-            frameBorder="0"
-            className="giphy-embed"
-            allowFullScreen
-          ></iframe>
-        )}
-        <Similar id={pathId} />
+        <Trailers media="movie" id={pathId} />
+        <Similar media="movie" id={pathId} />
       </Details>
     </div>
   );
