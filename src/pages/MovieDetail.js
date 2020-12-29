@@ -7,27 +7,44 @@ import { motion } from "framer-motion";
 //import axios
 import axios from "axios";
 //import url
-import { getMediaDetails, getImageURL, getMediaCredits } from "../api";
+import {
+  getMediaDetails,
+  getImageURL,
+  getMediaCredits,
+  getMediaVideo,
+} from "../api";
 //import components
 import MediaBaner from "../components/MediaBaner";
 import MediaArticle from "../components/MediaArticle";
+import Trailers from "../components/Trailers";
 
 const MovieDetail = () => {
   // state;
   const [movie, setMovie] = useState(null);
   const [credits, setCredits] = useState(null);
+  const [videos, setVideos] = useState(null);
   const [isLoading, setLoading] = useState(true);
   //get the current location
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
   //get apis response
   useEffect(() => {
-    axios.get(getMediaDetails("movie", pathId)).then((res) => {
-      setMovie(res);
-      setLoading(false);
-    });
-    axios.get(getMediaCredits("movie", pathId)).then((res) => setCredits(res));
-  }, []);
+    axios
+      .get(getMediaDetails("movie", pathId))
+      .then((res) => {
+        setMovie(res);
+        setLoading(false);
+      })
+      .catch((err) => `${console.log(err)} movie`);
+    axios
+      .get(getMediaCredits("movie", pathId))
+      .then((res) => setCredits(res))
+      .catch((err) => `${console.log(err)} credits`);
+    axios
+      .get(getMediaVideo("movie", pathId))
+      .then((res) => setVideos(res))
+      .catch((err) => `${console.log(err)} video`);
+  }, [pathId]);
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -35,7 +52,8 @@ const MovieDetail = () => {
     <div>
       {
         (movie,
-        credits && (
+        credits,
+        videos && (
           <Details>
             <MediaBaner
               movie={movie}
@@ -64,6 +82,7 @@ const MovieDetail = () => {
               status={movie.data.status}
               language={movie.data.original_language}
             />
+            <Trailers videos={videos.data.results} />
           </Details>
         ))
       }

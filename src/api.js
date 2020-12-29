@@ -15,3 +15,5 @@ export const getSearchedTv = (item) =>
   `${baseUrl}3/search/tv?api_key=${apiKey}&language=en-US&query=${item}&page=1&include_adult=false`;
 export const getPersonsImage = (id) =>
   `${baseUrl}3/person/${id}/images?apki_key=${apiKey}`;
+export const getMediaVideo = (media, id) =>
+  `${baseUrl}/3/${media}/${id}/videos?api_key=${apiKey}&language=en-US`;

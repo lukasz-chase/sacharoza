@@ -85,7 +85,6 @@ const MediaBanerComponent = styled(motion.div)`
     display: flex;
     p {
       display: flex;
-      padding: 0rem 0.5rem;
       justify-content: center;
       align-items: center;
     }
@@ -118,7 +117,6 @@ const UnderTitle = styled(motion.div)`
   display: flex;
   font-size: 1rem;
   font-weight: lighter;
-  padding: 0rem 3rem;
   h4 {
     font-weight: lighter;
   }
