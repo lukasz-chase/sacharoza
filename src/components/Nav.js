@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+//import router
+import { useHistory } from "react-router-dom";
 //styled
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -14,6 +16,8 @@ import { Link } from "react-router-dom";
 const Nav = ({ setSearchedMovie, setSearchedTv }) => {
   //state
   const [textInput, setTextInput] = useState("");
+  const history = useHistory();
+  //handlers
   const inputHandler = (e) => {
     setTextInput(e.target.value);
   };
@@ -31,7 +35,11 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
       .then((res) => setSearchedTv(res))
       .catch((err) => console.log(err));
   };
-
+  const pageHandler = (e) => {
+    if (e.key === "Enter") {
+      history.push("/searched");
+    }
+  };
   return (
     <Navbar>
       <Link to="/">
@@ -53,6 +61,7 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
             placeholder="search"
             value={textInput}
             onChange={inputHandler}
+            onKeyDown={pageHandler}
           />
 
           <button onClick={submitSearch}>
