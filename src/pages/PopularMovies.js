@@ -8,92 +8,113 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 //import components
 import Card from "../components/Card";
+//link
+import { Link } from "react-router-dom";
 
 const PopularMovies = () => {
   // state
   const [popular, setPopular] = useState(null);
-  const [active, setActive] = useState(popular);
+  const [active, setActive] = useState(null);
   const [more, setMore] = useState(null);
+  let [number, setNumber] = useState(2);
   //Ref
   const select = useRef(null);
   //get apis response
   useEffect(() => {
     axios
       .get(getPopularMedia("movie", "1"))
-      .then((res) => setPopular(res.data.results))
-      .catch((err) => `${console.log(err)} movie`);
-    setActive(popular);
-    axios
-      .get(getPopularMedia("movie", "2"))
-      .then((res) => setMore(res.data.results));
+      .then((res) => setPopular(res.data.results));
   }, [popular]);
+  useEffect(() => {
+    axios
+      .get(getPopularMedia("movie", number))
+      .then((res) => setMore(res.data.results));
+  }, [number]);
   //handlers
   const sortHandler = () => {
     if (select.current.options[select.current.selectedIndex].value === "1") {
       setActive(
-        popular.data.results.sort((a, b) => b.popularity - a.popularity)
+        active
+          ? active.sort((a, b) => b.popularity - a.popularity)
+          : popular.sort((a, b) => b.popularity - a.popularity)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "2"
     ) {
       setActive(
-        popular.data.results.sort((a, b) => a.popularity - b.popularity)
+        active
+          ? active.sort((a, b) => a.popularity - b.popularity)
+          : popular.sort((a, b) => a.popularity - b.popularity)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "3"
     ) {
       setActive(
-        popular.data.results.sort((a, b) => a.vote_average - b.vote_average)
+        active
+          ? active.sort((a, b) => a.vote_average - b.vote_average)
+          : popular.sort((a, b) => a.vote_average - b.vote_average)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "4"
     ) {
       setActive(
-        popular.data.results.sort((a, b) => b.vote_average - a.vote_average)
+        active
+          ? active.sort((a, b) => b.vote_average - a.vote_average)
+          : popular.sort((a, b) => b.vote_average - a.vote_average)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "5"
     ) {
       setActive(
-        popular.data.results.sort(
-          (a, b) => new Date(a.release_date) - new Date(b.release_date)
-        )
+        active
+          ? active.sort(
+              (a, b) => new Date(a.release_date) - new Date(b.release_date)
+            )
+          : popular.sort(
+              (a, b) => new Date(a.release_date) - new Date(b.release_date)
+            )
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "6"
     ) {
       setActive(
-        popular.data.results.sort(
-          (a, b) => new Date(b.release_date) - new Date(a.release_date)
-        )
+        active
+          ? active.sort(
+              (a, b) => new Date(b.release_date) - new Date(a.release_date)
+            )
+          : popular.sort(
+              (a, b) => new Date(b.release_date) - new Date(a.release_date)
+            )
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "7"
     ) {
       setActive(
-        popular.data.results.sort((a, b) => (a.title < b.title ? -1 : 1))
+        active
+          ? active.sort((a, b) => (a.title < b.title ? -1 : 1))
+          : popular.sort((a, b) => (a.title < b.title ? -1 : 1))
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "8"
     ) {
       setActive(
-        popular.data.results.sort((a, b) => (a.title > b.title ? -1 : 1))
+        active
+          ? active.sort((a, b) => (a.title > b.title ? -1 : 1))
+          : popular.sort((a, b) => (a.title > b.title ? -1 : 1))
       );
     }
   };
   const ShowMoreHandler = () => {
-    const dupa = popular.concat(more);
-    const kupa = [...active, ...more];
-    setMore([...active, ...more]);
-    // setActive((active) => [active.concat(more)]);
-
-    console.log(dupa);
-    console.log(kupa);
-    console.log(more);
+    setNumber(number + 1);
+    if (active) {
+      setActive([...active, ...more]);
+    } else {
+      setActive([...popular, ...more]);
+    }
   };
   return (
     <>
-      {active ? (
+      {popular ? (
         <PopularComponent>
           <Sorting>
             <div className="sortComponent">
@@ -110,18 +131,41 @@ const PopularMovies = () => {
               </select>
             </div>
           </Sorting>
-          <Movies>
-            {active.map((movie) => (
-              <Card
-                movieTitle={movie.title}
-                key={movie.id}
-                movieImage={movie.poster_path}
-              />
-            ))}
-            <button className="loadMore" onClick={ShowMoreHandler}>
-              Load More
-            </button>
-          </Movies>
+          {active ? (
+            <Movies>
+              {active.map((movie) => (
+                <Link to={`/movie/${movie.id}`} key={movie.id}>
+                  <Card
+                    movieTitle={movie.title}
+                    key={movie.id}
+                    movieImage={movie.poster_path}
+                  />
+                </Link>
+              ))}
+              <button className="loadMore" onClick={ShowMoreHandler}>
+                Load More
+              </button>
+            </Movies>
+          ) : (
+            <Movies>
+              {popular.map((movie) => (
+                <Link
+                  to={`/movie/${movie.id}`}
+                  key={movie.id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Card
+                    movieTitle={movie.title}
+                    key={movie.id}
+                    movieImage={movie.poster_path}
+                  />
+                </Link>
+              ))}
+              <button className="loadMore" onClick={ShowMoreHandler}>
+                Load More
+              </button>
+            </Movies>
+          )}
         </PopularComponent>
       ) : (
         <iframe

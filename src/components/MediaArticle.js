@@ -1,10 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
+//import axios
+import axios from "axios";
+//import url
+import { getExternalId } from "../api";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 //url
 import { getImageURL } from "../api";
 //Components
@@ -19,8 +26,19 @@ const MediaArticle = ({
   crew,
   episodes,
   seasons,
+  id,
 }) => {
+  //state
+  const [externalIds, setExternalIds] = useState(null);
+  //useEffect
+  useEffect(() => {
+    axios
+      .get(getExternalId("movie", id))
+      .then((res) => setExternalIds(res.data));
+  }, [id]);
+  //ref
   const creditsContainer = useRef(null);
+  //handlers
   const openCredits = () => {
     creditsContainer.current.style.display = "block";
   };
@@ -51,6 +69,31 @@ const MediaArticle = ({
         </div>
       </ArticleLeft>
       <ArticleRight>
+        {externalIds && externalIds.facebook_id != null && (
+          <SocialMedia>
+            <a
+              href={`https://www.facebook.com/${externalIds.facebook_id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faFacebook} className="social" />
+            </a>
+            <a
+              href={`https://www.instagram.com/${externalIds.instagram_id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faInstagram} className="social" />
+            </a>
+            <a
+              href={`https://www.twitter.com/${externalIds.twitter_id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faTwitter} className="social" />
+            </a>
+          </SocialMedia>
+        )}
         <Item>
           <p>Status</p>
           <p className="value">{status}</p>
@@ -140,6 +183,18 @@ const Cast = styled(motion.div)`
     height: 30vh;
     width: 20vh;
     object-fit: cover;
+  }
+`;
+const SocialMedia = styled(motion.div)`
+  display: flex;
+  a {
+    color: black;
+    padding: 1rem 0rem;
+    cursor: pointer;
+    .social {
+      font-size: 2rem;
+      margin-right: 1.5rem;
+    }
   }
 `;
 const Item = styled(motion.div)`

@@ -23,14 +23,8 @@ const MovieDetail = () => {
   const pathId = location.pathname.split("/")[2];
   //get apis response
   useEffect(() => {
-    axios
-      .get(getMediaDetails("movie", pathId))
-      .then((res) => setMovie(res))
-      .catch((err) => `${console.log(err)} movie`);
-    axios
-      .get(getMediaCredits("movie", pathId))
-      .then((res) => setCredits(res))
-      .catch((err) => `${console.log(err)} credits`);
+    axios.get(getMediaDetails("movie", pathId)).then((res) => setMovie(res));
+    axios.get(getMediaCredits("movie", pathId)).then((res) => setCredits(res));
   }, [pathId]);
   return (
     <div>

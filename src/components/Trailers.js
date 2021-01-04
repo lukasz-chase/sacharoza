@@ -14,17 +14,13 @@ const Trailers = ({ id, media }) => {
   const [videos, setVideos] = useState(null);
   //setting state
   useEffect(() => {
-    axios
-      .get(getMediaVideo(media, id))
-      .then((res) => setVideos(res))
-      .catch((err) => `${console.log(err)} video`);
+    axios.get(getMediaVideo(media, id)).then((res) => setVideos(res));
   }, [media, id]);
-  console.log(videos);
   return (
     <div>
       {videos && (
         <TrailersComponent>
-          <h1>Official Trailer</h1>
+          <h1>{videos.data.results.length > 1 ? "Official Trailer" : ""} </h1>
           {videos.data.results
             .filter((video) => video.name.includes("Official"))
             .map((video) => (
@@ -41,24 +37,28 @@ const Trailers = ({ id, media }) => {
               </p>
             ))}
           <h1>{videos.data.results.length > 1 ? "Videos" : ""}</h1>
-          <Toggle state={true}>
-            <VideosComponent>
-              {videos.data.results.slice(1).map((video) => (
-                <p key={video.id}>
-                  <iframe
-                    className="videosClass"
-                    title={video.id}
-                    width="400"
-                    height="245"
-                    src={`https://www.youtube.com/embed/${video.key}`}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </p>
-              ))}
-            </VideosComponent>
-          </Toggle>
+          {videos.data.results.length > 1 ? (
+            <Toggle state={true}>
+              <VideosComponent>
+                {videos.data.results.slice(1).map((video) => (
+                  <p key={video.id}>
+                    <iframe
+                      className="videosClass"
+                      title={video.id}
+                      width="400"
+                      height="245"
+                      src={`https://www.youtube.com/embed/${video.key}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </p>
+                ))}
+              </VideosComponent>
+            </Toggle>
+          ) : (
+            ""
+          )}
         </TrailersComponent>
       )}
     </div>

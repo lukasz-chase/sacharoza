@@ -28,14 +28,8 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
     setTextInput("");
     const searchedMovieURL = getSearchedMovie(textInput);
     const searchedTvURL = getSearchedTv(textInput);
-    axios
-      .get(searchedMovieURL)
-      .then((res) => setSearchedMovie(res))
-      .catch((err) => console.log(err));
-    axios
-      .get(searchedTvURL)
-      .then((res) => setSearchedTv(res))
-      .catch((err) => console.log(err));
+    axios.get(searchedMovieURL).then((res) => setSearchedMovie(res));
+    axios.get(searchedTvURL).then((res) => setSearchedTv(res));
   };
   const pageHandler = (e) => {
     if (e.key === "Enter") {

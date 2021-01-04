@@ -13,16 +13,12 @@ const Similar = ({ media, id }) => {
   const [similar, setSimilar] = useState(null);
   //use Effect
   useEffect(() => {
-    axios
-      .get(getSimilarMedia(media, id))
-      .then((res) => setSimilar(res))
-      .catch((err) => `${console.log(err)} video`);
+    axios.get(getSimilarMedia(media, id)).then((res) => setSimilar(res));
   }, [media, id]);
-  console.log(similar);
   return (
     <SimilarComponent>
       <Media>
-        <h1>Similar {media}</h1>
+        <h1>{similar && similar.length > 1 ? `Similar ${media}` : ""}</h1>
         {similar ? (
           <ItemsComponent>
             {similar.data.results.map((item) => (
