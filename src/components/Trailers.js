@@ -20,15 +20,21 @@ const Trailers = ({ id, media }) => {
     <div>
       {videos && (
         <TrailersComponent>
-          <h1>{videos.data.results.length > 1 ? "Official Trailer" : ""} </h1>
+          <h1>
+            {videos.data.results.filter((video) =>
+              video.name.includes("Official")
+            ).length > 1
+              ? "Official Trailer"
+              : ""}{" "}
+          </h1>
           {videos.data.results
             .filter((video) => video.name.includes("Official"))
             .map((video) => (
               <p key={video.id}>
                 <iframe
                   title={video.id}
-                  width="1100"
-                  height="565"
+                  width="900"
+                  height="375"
                   src={`https://www.youtube.com/embed/${video.key}`}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -18,12 +18,12 @@ const Similar = ({ media, id }) => {
   return (
     <SimilarComponent>
       <Media>
-        <h1>{similar && similar.length > 1 ? `Similar ${media}` : ""}</h1>
+        <h1>{similar ? `Similar ${media}` : ""}</h1>
         {similar ? (
           <ItemsComponent>
             {similar.data.results.map((item) => (
               <Link
-                to={`/movie/${item.id}`}
+                to={`/${media}/${item.id}`}
                 key={item.id}
                 style={{ textDecoration: "none" }}
                 onClick={() => window.scrollTo(0, 0)}

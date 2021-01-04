@@ -44,7 +44,7 @@ const Searched = ({ searchedMovie, searchedTv }) => {
             {tvshows.map((item) => (
               <Link
                 key={item.id}
-                to={`/tvshow/${item.id}`}
+                to={`/tv/${item.id}`}
                 style={{ textDecoration: "none" }}
               >
                 <Card

@@ -68,6 +68,9 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
                 <Link to="/top/movies" style={{ padding: 0 }}>
                   <div className="list-item">Top Rated</div>
                 </Link>
+                <Link to="/movies/now-playing" style={{ padding: 0 }}>
+                  <div className="list-item">now playing</div>
+                </Link>
               </div>
             )}
           </Dropdown>

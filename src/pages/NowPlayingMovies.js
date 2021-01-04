@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 //import axios
 import axios from "axios";
 //import url
-import { getPopularMedia } from "../api";
+import { getNowPlayingMedia } from "../api";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -11,9 +11,9 @@ import Card from "../components/Card";
 //link
 import { Link } from "react-router-dom";
 
-const PopularMovies = () => {
+const NowPlayingMovies = () => {
   // state
-  const [popular, setPopular] = useState(null);
+  const [playing, setPlaying] = useState(null);
   const [active, setActive] = useState(null);
   const [more, setMore] = useState(null);
   let [number, setNumber] = useState(2);
@@ -22,12 +22,12 @@ const PopularMovies = () => {
   //get apis response
   useEffect(() => {
     axios
-      .get(getPopularMedia("movie", "1"))
-      .then((res) => setPopular(res.data.results));
-  }, [popular]);
+      .get(getNowPlayingMedia("movie", "1"))
+      .then((res) => setPlaying(res.data.results));
+  }, [playing]);
   useEffect(() => {
     axios
-      .get(getPopularMedia("movie", number))
+      .get(getNowPlayingMedia("movie", number))
       .then((res) => setMore(res.data.results));
   }, [number]);
   //handlers
@@ -37,7 +37,7 @@ const PopularMovies = () => {
       setActive(
         active
           ? active.sort((a, b) => b.popularity - a.popularity)
-          : popular.sort((a, b) => b.popularity - a.popularity)
+          : playing.sort((a, b) => b.popularity - a.popularity)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "2"
@@ -45,7 +45,7 @@ const PopularMovies = () => {
       setActive(
         active
           ? active.sort((a, b) => a.popularity - b.popularity)
-          : popular.sort((a, b) => a.popularity - b.popularity)
+          : playing.sort((a, b) => a.popularity - b.popularity)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "3"
@@ -53,7 +53,7 @@ const PopularMovies = () => {
       setActive(
         active
           ? active.sort((a, b) => a.vote_average - b.vote_average)
-          : popular.sort((a, b) => a.vote_average - b.vote_average)
+          : playing.sort((a, b) => a.vote_average - b.vote_average)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "4"
@@ -61,7 +61,7 @@ const PopularMovies = () => {
       setActive(
         active
           ? active.sort((a, b) => b.vote_average - a.vote_average)
-          : popular.sort((a, b) => b.vote_average - a.vote_average)
+          : playing.sort((a, b) => b.vote_average - a.vote_average)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "5"
@@ -71,7 +71,7 @@ const PopularMovies = () => {
           ? active.sort(
               (a, b) => new Date(a.release_date) - new Date(b.release_date)
             )
-          : popular.sort(
+          : playing.sort(
               (a, b) => new Date(a.release_date) - new Date(b.release_date)
             )
       );
@@ -83,7 +83,7 @@ const PopularMovies = () => {
           ? active.sort(
               (a, b) => new Date(b.release_date) - new Date(a.release_date)
             )
-          : popular.sort(
+          : playing.sort(
               (a, b) => new Date(b.release_date) - new Date(a.release_date)
             )
       );
@@ -93,7 +93,7 @@ const PopularMovies = () => {
       setActive(
         active
           ? active.sort((a, b) => (a.title < b.title ? -1 : 1))
-          : popular.sort((a, b) => (a.title < b.title ? -1 : 1))
+          : playing.sort((a, b) => (a.title < b.title ? -1 : 1))
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "8"
@@ -101,7 +101,7 @@ const PopularMovies = () => {
       setActive(
         active
           ? active.sort((a, b) => (a.title > b.title ? -1 : 1))
-          : popular.sort((a, b) => (a.title > b.title ? -1 : 1))
+          : playing.sort((a, b) => (a.title > b.title ? -1 : 1))
       );
     }
   };
@@ -110,16 +110,16 @@ const PopularMovies = () => {
     if (active) {
       setActive([...active, ...more]);
     } else {
-      setActive([...popular, ...more]);
+      setActive([...playing, ...more]);
     }
   };
   return (
     <>
-      {popular ? (
+      {playing ? (
         <PopularComponent>
           <Sorting>
             <div className="sortComponent">
-              <span>Popular Movies</span>
+              <span>Now playing Movies</span>
               <select ref={select} name="" id="" onChange={sortHandler}>
                 <option value="1">Popularity descending</option>
                 <option value="2">Popularity ascending</option>
@@ -153,7 +153,7 @@ const PopularMovies = () => {
             </Movies>
           ) : (
             <Movies>
-              {popular.map((movie) => (
+              {playing.map((movie) => (
                 <Link
                   to={`/movie/${movie.id}`}
                   key={movie.id}
@@ -241,4 +241,4 @@ const Movies = styled(motion.div)`
   }
 `;
 
-export default PopularMovies;
+export default NowPlayingMovies;

@@ -23,6 +23,7 @@ const MovieDetail = () => {
   const pathId = location.pathname.split("/")[2];
   //get apis response
   useEffect(() => {
+    window.scrollTo(0, 0);
     axios.get(getMediaDetails("movie", pathId)).then((res) => setMovie(res));
     axios.get(getMediaCredits("movie", pathId)).then((res) => setCredits(res));
   }, [pathId]);

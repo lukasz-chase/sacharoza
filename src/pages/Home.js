@@ -133,7 +133,7 @@ const Home = () => {
           <>
             {trendingTv.map((tvshow) => (
               <Link
-                to={`/tvshow/${tvshow.id}`}
+                to={`/tv/${tvshow.id}`}
                 key={tvshow.id}
                 style={{ textDecoration: "none" }}
               >

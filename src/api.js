@@ -23,5 +23,12 @@ export const getSimilarMedia = (media, id) =>
   `${baseUrl}3/${media}/${id}/similar?api_key=${apiKey}&language=en-US&page=1`;
 export const getPopularMedia = (media, page) =>
   `${baseUrl}3/${media}/popular?api_key=${apiKey}&language=en-US&page=${page}`;
+export const getUpcomingMedia = (media, page) =>
+  `${baseUrl}3/${media}/upcoming?api_key=${apiKey}&language=en-US&page=${page}`;
+export const getTopRatedMedia = (media, page) =>
+  `${baseUrl}3/${media}/top_rated?api_key=${apiKey}&language=en-US&page=${page}`;
+export const getNowPlayingMedia = (media, page) =>
+  `${baseUrl}3/${media}/now_playing?api_key=${apiKey}&language=en-US&page=${page}`;
+
 export const getExternalId = (media, id) =>
   `${baseUrl}3/${media}/${id}/external_ids?api_key=${apiKey}`;

@@ -13,6 +13,7 @@ import TopRatedMovies from "./pages/TopRatedMovies";
 import TopRatedTv from "./pages/TopRatedTv";
 import UpcomingMovies from "./pages/UpcomingMovies";
 import UpcomingTv from "./pages/UpcomingTv";
+import NowPlayingMovies from "./pages/NowPlayingMovies";
 
 //Styles
 import GlobalStyles from "./components/GlobalStyles";
@@ -30,10 +31,10 @@ function App() {
       <Route path="/" exact>
         <Home />
       </Route>
-      <Route path="/movie/:id">
+      <Route path="/movie/:id" exact>
         <MovieDetail />
       </Route>
-      <Route path="/tvshow/:id" exact>
+      <Route path="/tv/:id" exact>
         <TvShowDetails />
       </Route>
       <Route path="/searched">
@@ -56,6 +57,9 @@ function App() {
       </Route>
       <Route path="/top/tv" exact>
         <TopRatedTv />
+      </Route>
+      <Route path="/movies/now-playing" exact>
+        <NowPlayingMovies />
       </Route>
       <Footer />
     </div>
