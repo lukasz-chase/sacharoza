@@ -24,6 +24,7 @@ const TvShowDetails = () => {
   useEffect(() => {
     axios.get(getMediaDetails("tv", pathId)).then((res) => setTvShow(res));
     axios.get(getTvCredits("tv", pathId)).then((res) => setCredits(res));
+    window.scrollTo(0, 0);
   }, [pathId]);
 
   return (

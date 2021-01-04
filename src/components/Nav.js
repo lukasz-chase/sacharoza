@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 const Nav = ({ setSearchedMovie, setSearchedTv }) => {
   //state
   const [textInput, setTextInput] = useState("");
+  const [moviesHover, setMoviesHover] = useState(false);
+  const [tvHover, setTvHover] = useState(false);
   const history = useHistory();
   //handlers
   const inputHandler = (e) => {
@@ -47,13 +49,62 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
       </Link>
       <RightNav>
         <Links>
-          <Link to="/movies">Movies</Link>
-          {/* <div className="dropdown">
-              <button>Trending</button>
-              <button>In Theather</button>
-              <button></button>
-          </div> */}
-          <Link to="/tvshows">TvShows</Link>
+          <Dropdown>
+            <div className="header">
+              <div
+                className="title"
+                onMouseEnter={() => setMoviesHover(true)}
+                onMouseLeave={() => setMoviesHover(false)}
+              >
+                Movies{" "}
+              </div>
+            </div>
+            {moviesHover && (
+              <div
+                className="list"
+                onMouseEnter={() => setMoviesHover(true)}
+                onMouseLeave={() => setMoviesHover(false)}
+              >
+                <Link to="/popular/movies" style={{ padding: 0 }}>
+                  <div className="list-item">Popular</div>
+                </Link>
+                <Link to="/upcoming/movies" style={{ padding: 0 }}>
+                  <div className="list-item">Upcoming</div>
+                </Link>
+                <Link to="/top/movies" style={{ padding: 0 }}>
+                  <div className="list-item">Top Rated</div>
+                </Link>
+              </div>
+            )}
+          </Dropdown>
+          <Dropdown>
+            <div className="header">
+              <div
+                className="title"
+                onMouseEnter={() => setTvHover(true)}
+                onMouseLeave={() => setTvHover(false)}
+              >
+                TV Shows{" "}
+              </div>
+            </div>
+            {tvHover && (
+              <div
+                className="list"
+                onMouseEnter={() => setTvHover(true)}
+                onMouseLeave={() => setTvHover(false)}
+              >
+                <Link to="/popular/tv" style={{ padding: 0 }}>
+                  <div className="list-item">Popular</div>
+                </Link>
+                <Link to="/upcoming/tv" style={{ padding: 0 }}>
+                  <div className="list-item">Upcoming</div>
+                </Link>
+                <Link to="/top/tv" style={{ padding: 0 }}>
+                  <div className="list-item">Top Rated</div>
+                </Link>
+              </div>
+            )}
+          </Dropdown>
         </Links>
         <form>
           <input
@@ -100,10 +151,36 @@ const Navbar = styled(motion.div)`
     outline: none;
   }
 `;
-const Links = styled(motion.div)``;
+const Links = styled(motion.div)`
+  display: flex;
+  justify-content: space-between;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const RightNav = styled(motion.div)`
   display: flex;
   justify-content: space-evenly;
 `;
-
+const Dropdown = styled(motion.div)`
+  padding: 0rem 3rem;
+  .list {
+    position: absolute;
+    background-color: white;
+    padding-top: 1rem;
+    border-radius: 0.5rem;
+    .list-item {
+      display: flex;
+      height: 2rem;
+      min-width: 12rem;
+      padding: 1.2rem;
+      align-items: center;
+      color: black;
+      &:hover {
+        background-color: rgb(152, 152, 152, 0.3);
+      }
+    }
+  }
+`;
 export default Nav;

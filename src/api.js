@@ -21,3 +21,5 @@ export const getMediaVideo = (media, id) =>
   `${baseUrl}3/${media}/${id}/videos?api_key=${apiKey}&language=en-US`;
 export const getSimilarMedia = (media, id) =>
   `${baseUrl}3/${media}/${id}/similar?api_key=${apiKey}&language=en-US&page=1`;
+export const getPopularMedia = (media, page) =>
+  `${baseUrl}3/${media}/popular?api_key=${apiKey}&language=en-US&page=1`;

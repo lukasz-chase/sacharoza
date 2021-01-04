@@ -17,7 +17,7 @@ const Similar = ({ media, id }) => {
       .get(getSimilarMedia(media, id))
       .then((res) => setSimilar(res))
       .catch((err) => `${console.log(err)} video`);
-  }, [id]);
+  }, [media, id]);
   console.log(similar);
   return (
     <SimilarComponent>

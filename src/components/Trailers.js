@@ -18,7 +18,7 @@ const Trailers = ({ id, media }) => {
       .get(getMediaVideo(media, id))
       .then((res) => setVideos(res))
       .catch((err) => `${console.log(err)} video`);
-  }, [id]);
+  }, [media, id]);
   console.log(videos);
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -93,6 +93,10 @@ const CrewComponent = styled(motion.div)`
   .person {
     display: flex;
   }
+  h1 {
+    position: absolute;
+    top: 0;
+  }
 `;
 const CastComponent = styled(motion.div)`
   width: 40%;
@@ -122,6 +126,10 @@ const CastComponent = styled(motion.div)`
       cursor: pointer;
       color: red;
     }
+  }
+  h1 {
+    position: absolute;
+    top: 0;
   }
 `;
 const Card = styled(motion.div)`

@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 //importing components
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
+//importing pages
 import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
+import PopularMovies from "./pages/PopularMovies";
 import TvShowDetails from "./pages/TvShowDetails";
-import Nav from "./components/Nav";
 import Searched from "./pages/Searched";
-import Footer from "./components/Footer";
+import PopularTv from "./pages/PopularTv";
+import TopRatedMovies from "./pages/TopRatedMovies";
+import TopRatedTv from "./pages/TopRatedTv";
+import UpcomingMovies from "./pages/UpcomingMovies";
+import UpcomingTv from "./pages/UpcomingTv";
+
 //Styles
 import GlobalStyles from "./components/GlobalStyles";
 //Router
@@ -30,6 +38,24 @@ function App() {
       </Route>
       <Route path="/searched">
         <Searched searchedMovie={searchedMovie} searchedTv={searchedTv} />
+      </Route>
+      <Route path="/popular/movies" exact>
+        <PopularMovies />
+      </Route>
+      <Route path="/upcoming/movies" exact>
+        <UpcomingMovies />
+      </Route>
+      <Route path="/top/movies" exact>
+        <TopRatedMovies />
+      </Route>
+      <Route path="/popular/tv" exact>
+        <PopularTv />
+      </Route>
+      <Route path="/upcoming/tv" exact>
+        <UpcomingTv />
+      </Route>
+      <Route path="/top/tv" exact>
+        <TopRatedTv />
       </Route>
       <Footer />
     </div>
