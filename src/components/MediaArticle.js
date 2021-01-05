@@ -223,8 +223,8 @@ const Item = styled(motion.div)`
   img {
     display: flex;
     flex-wrap: wrap;
-    width: 9rem;
-    height: 5rem;
+    width: 7rem;
+    height: 3rem;
     object-fit: contain;
   }
 `;

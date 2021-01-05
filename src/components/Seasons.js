@@ -48,7 +48,7 @@ const Season = ({ id, seasonsNumber, seasons }) => {
               See all seasons
             </span>
           </LatestSeason>
-          <AllSeasons seasonsRef={seasonsRef} seasons={seasons} />
+          <AllSeasons id={id} seasonsRef={seasonsRef} seasons={seasons} />
         </SeasonsComponent>
       ) : (
         <iframe
@@ -68,7 +68,7 @@ const Season = ({ id, seasonsNumber, seasons }) => {
 const SeasonsComponent = styled(motion.div)`
   width: 85%;
   padding: 0rem 1rem;
-  margin-top: -15vh;
+  margin-top: -12vh;
   font-size: 3rem;
   font-weight: bold;
   h1 {

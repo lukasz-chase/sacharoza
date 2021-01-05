@@ -7,14 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
-const Toggle = ({ children, state }) => {
+const Toggle = ({ children, state, arrowColor }) => {
   const [toggle, setToggle] = useState(state);
   return (
     <ToggleContainer onClick={() => setToggle(!toggle)}>
       {toggle ? (
-        <FontAwesomeIcon icon={faAngleDown} />
+        <FontAwesomeIcon icon={faAngleDown} style={{ color: arrowColor }} />
       ) : (
-        <FontAwesomeIcon icon={faAngleUp} />
+        <FontAwesomeIcon icon={faAngleUp} style={{ color: arrowColor }} />
       )}
       {!toggle ? children : ""}
     </ToggleContainer>

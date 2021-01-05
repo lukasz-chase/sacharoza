@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
-//import axios
-import axios from "axios";
 //url
-import { getImageURL, getSeasons } from "../api";
+import { getImageURL } from "../api";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+//import components
+import Episodes from "../components/Episodes";
+import Toggle from "../components/Toggle";
 
-const AllSeasons = ({ seasonsRef, seasons }) => {
+const AllSeasons = ({ seasonsRef, seasons, id }) => {
   //handlers
   const closeSeasons = (e) => {
     const element = e.target;
@@ -18,7 +19,6 @@ const AllSeasons = ({ seasonsRef, seasons }) => {
       seasonsRef.current.style.display = "none";
     }
   };
-  console.log(seasons);
   return (
     <SeasonsComponent
       onClick={closeSeasons}
@@ -31,23 +31,27 @@ const AllSeasons = ({ seasonsRef, seasons }) => {
         onClick={() => (seasonsRef.current.style.display = "none")}
       />
       {seasons.map((season) => (
-        <SingleSeason key={season.id}>
-          <img
-            src={
-              season.poster_path
-                ? getImageURL("500", season.poster_path)
-                : "https://piotrkowalski.pw/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png"
-            }
-            alt=""
-          />
-          <div className="seasonInfo">
-            <span>{season.name}</span>
-            <p>
-              {season.air_date} || {season.episode_count} Episodes
-            </p>
-          </div>
-          {/* <Episodes></Episodes> */}
-        </SingleSeason>
+        <>
+          <SingleSeason key={season.id}>
+            <img
+              src={
+                season.poster_path
+                  ? getImageURL("500", season.poster_path)
+                  : "https://piotrkowalski.pw/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png"
+              }
+              alt=""
+            />
+            <div className="seasonInfo">
+              <span>{season.name}</span>
+              <p>
+                {season.air_date} || {season.episode_count} Episodes
+              </p>
+            </div>
+          </SingleSeason>
+          <Toggle state={true} arrowColor="white">
+            <Episodes id={id} seasonsNumber={season.season_number}></Episodes>
+          </Toggle>
+        </>
       ))}
     </SeasonsComponent>
   );
@@ -57,7 +61,7 @@ const SeasonsComponent = styled(motion.div)`
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   position: fixed;
   top: 0;
   left: 0;
@@ -92,8 +96,5 @@ const SingleSeason = styled(motion.div)`
     object-fit: cover;
   }
 `;
-// const Episodes = styled(motion.div)`
-//   display: flex;
-// `;
 
 export default AllSeasons;
