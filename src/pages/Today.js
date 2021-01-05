@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 //import axios
 import axios from "axios";
 //import url
-import { getTopRatedMedia } from "../api";
+import { getTodaysTv } from "../api";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -11,7 +11,7 @@ import Card from "../components/Card";
 //link
 import { Link } from "react-router-dom";
 
-const TopRatedTv = () => {
+const Today = () => {
   // state
   const [popular, setPopular] = useState(null);
   const [active, setActive] = useState(null);
@@ -22,12 +22,12 @@ const TopRatedTv = () => {
   //get apis response
   useEffect(() => {
     axios
-      .get(getTopRatedMedia("tv", "1"))
+      .get(getTodaysTv("tv", "1"))
       .then((res) => setPopular(res.data.results));
   }, [popular]);
   useEffect(() => {
     axios
-      .get(getTopRatedMedia("tv", number))
+      .get(getTodaysTv("tv", number))
       .then((res) => setMore(res.data.results));
   }, [number]);
   //handlers
@@ -241,4 +241,4 @@ const Movies = styled(motion.div)`
   }
 `;
 
-export default TopRatedTv;
+export default Today;

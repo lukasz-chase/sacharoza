@@ -12,8 +12,9 @@ import PopularTv from "./pages/PopularTv";
 import TopRatedMovies from "./pages/TopRatedMovies";
 import TopRatedTv from "./pages/TopRatedTv";
 import UpcomingMovies from "./pages/UpcomingMovies";
-import UpcomingTv from "./pages/UpcomingTv";
+import OnAir from "./pages/OnAir";
 import NowPlayingMovies from "./pages/NowPlayingMovies";
+import Today from "./pages/Today";
 
 //Styles
 import GlobalStyles from "./components/GlobalStyles";
@@ -52,11 +53,14 @@ function App() {
       <Route path="/popular/tv" exact>
         <PopularTv />
       </Route>
-      <Route path="/upcoming/tv" exact>
-        <UpcomingTv />
+      <Route path="/on-air/tv" exact>
+        <OnAir />
       </Route>
       <Route path="/top/tv" exact>
         <TopRatedTv />
+      </Route>
+      <Route path="/today/tv" exact>
+        <Today />
       </Route>
       <Route path="/movies/now-playing" exact>
         <NowPlayingMovies />

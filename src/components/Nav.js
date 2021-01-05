@@ -93,8 +93,11 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
                 <Link to="/popular/tv" style={{ padding: 0 }}>
                   <div className="list-item">Popular</div>
                 </Link>
-                <Link to="/upcoming/tv" style={{ padding: 0 }}>
-                  <div className="list-item">Upcoming</div>
+                <Link to="/today/tv" style={{ padding: 0 }}>
+                  <div className="list-item">Today in TV</div>
+                </Link>
+                <Link to="/on-air/tv" style={{ padding: 0 }}>
+                  <div className="list-item">On the air</div>
                 </Link>
                 <Link to="/top/tv" style={{ padding: 0 }}>
                   <div className="list-item">Top Rated</div>
