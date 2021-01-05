@@ -29,10 +29,10 @@ export const getTopRatedMedia = (media, page) =>
   `${baseUrl}3/${media}/top_rated?api_key=${apiKey}&language=en-US&page=${page}`;
 export const getNowPlayingMedia = (media, page) =>
   `${baseUrl}3/${media}/now_playing?api_key=${apiKey}&language=en-US&page=${page}`;
-export const getOnAir = (page) =>
-  `${baseUrl}3/tv/on_the_air?api_key=${apiKey}&language=en-US&page=${page}`;
-export const getTodaysTv = (page) =>
-  `${baseUrl}3/tv/airing_today?api_key=${apiKey}&language=en-US&page=${page}`;
+export const getOnAir = (media, page) =>
+  `${baseUrl}3/${media}/on_the_air?api_key=${apiKey}&language=en-US&page=${page}`;
+export const getTodaysTv = (media, page) =>
+  `${baseUrl}3/${media}/airing_today?api_key=${apiKey}&language=en-US&page=${page}`;
 
 export const getExternalId = (media, id) =>
   `${baseUrl}3/${media}/${id}/external_ids?api_key=${apiKey}`;
