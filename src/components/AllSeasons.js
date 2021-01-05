@@ -84,7 +84,7 @@ const SeasonsComponent = styled(motion.div)`
 `;
 const SingleSeason = styled(motion.div)`
   display: flex;
-  background-color: white;
+  background-color: #fcc97d;
   width: 80%;
   align-items: center;
   position: relative;

@@ -51,6 +51,7 @@ const FooterComponent = styled(motion.div)`
   }
   li {
     padding: 0.2rem 0rem;
+    cursor: pointer;
   }
 `;
 
