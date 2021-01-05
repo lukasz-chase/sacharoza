@@ -119,7 +119,7 @@ const TopRatedTv = () => {
         <PopularComponent>
           <Sorting>
             <div className="sortComponent">
-              <span>Popular Movies</span>
+              <span>Top rated TV series </span>
               <select ref={select} name="" id="" onChange={sortHandler}>
                 <option value="1">Popularity descending</option>
                 <option value="2">Popularity ascending</option>
@@ -136,12 +136,12 @@ const TopRatedTv = () => {
             <Movies>
               {active.map((movie) => (
                 <Link
-                  to={`/movie/${movie.id}`}
+                  to={`/tv/${movie.id}`}
                   key={movie.id}
                   style={{ textDecoration: "none" }}
                 >
                   <Card
-                    movieTitle={movie.title}
+                    movieTitle={movie.name}
                     key={movie.id}
                     movieImage={movie.poster_path}
                   />
@@ -155,12 +155,12 @@ const TopRatedTv = () => {
             <Movies>
               {popular.map((movie) => (
                 <Link
-                  to={`/movie/${movie.id}`}
+                  to={`/tv/${movie.id}`}
                   key={movie.id}
                   style={{ textDecoration: "none" }}
                 >
                   <Card
-                    movieTitle={movie.title}
+                    movieTitle={movie.name}
                     key={movie.id}
                     movieImage={movie.poster_path}
                   />

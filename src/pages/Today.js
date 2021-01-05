@@ -119,7 +119,7 @@ const Today = () => {
         <PopularComponent>
           <Sorting>
             <div className="sortComponent">
-              <span>Popular Movies</span>
+              <span>TV Series, today in TV</span>
               <select ref={select} name="" id="" onChange={sortHandler}>
                 <option value="1">Popularity descending</option>
                 <option value="2">Popularity ascending</option>

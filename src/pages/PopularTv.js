@@ -119,7 +119,7 @@ const PopularMovies = () => {
         <PopularComponent>
           <Sorting>
             <div className="sortComponent">
-              <span>Popular Movies</span>
+              <span>Popular Tv Series</span>
               <select ref={select} name="" id="" onChange={sortHandler}>
                 <option value="1">Popularity descending</option>
                 <option value="2">Popularity ascending</option>
@@ -134,16 +134,16 @@ const PopularMovies = () => {
           </Sorting>
           {active ? (
             <Movies>
-              {active.map((movie) => (
+              {active.map((tv) => (
                 <Link
-                  to={`/movie/${movie.id}`}
-                  key={movie.id}
+                  to={`/tv/${tv.id}`}
+                  key={tv.id}
                   style={{ textDecoration: "none" }}
                 >
                   <Card
-                    movieTitle={movie.title}
-                    key={movie.id}
-                    movieImage={movie.poster_path}
+                    tvTitle={tv.name}
+                    key={tv.id}
+                    movieImage={tv.poster_path}
                   />
                 </Link>
               ))}
@@ -153,16 +153,16 @@ const PopularMovies = () => {
             </Movies>
           ) : (
             <Movies>
-              {popular.map((movie) => (
+              {popular.map((tv) => (
                 <Link
-                  to={`/movie/${movie.id}`}
-                  key={movie.id}
+                  to={`/tv/${tv.id}`}
+                  key={tv.id}
                   style={{ textDecoration: "none" }}
                 >
                   <Card
-                    movieTitle={movie.title}
-                    key={movie.id}
-                    movieImage={movie.poster_path}
+                    tvTitle={tv.name}
+                    key={tv.id}
+                    movieImage={tv.poster_path}
                   />
                 </Link>
               ))}

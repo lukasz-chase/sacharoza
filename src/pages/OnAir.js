@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const OnAir = () => {
   // state
-  const [popular, setPopular] = useState(null);
+  const [onAir, setOnAir] = useState(null);
   const [active, setActive] = useState(null);
   const [more, setMore] = useState(null);
   let [number, setNumber] = useState(2);
@@ -21,8 +21,8 @@ const OnAir = () => {
   const select = useRef(null);
   //get apis response
   useEffect(() => {
-    axios.get(getOnAir("tv", "1")).then((res) => setPopular(res.data.results));
-  }, [popular]);
+    axios.get(getOnAir("tv", "1")).then((res) => setOnAir(res.data.results));
+  }, [onAir]);
   useEffect(() => {
     axios.get(getOnAir("tv", number)).then((res) => setMore(res.data.results));
   }, [number]);
@@ -33,7 +33,7 @@ const OnAir = () => {
       setActive(
         active
           ? active.sort((a, b) => b.popularity - a.popularity)
-          : popular.sort((a, b) => b.popularity - a.popularity)
+          : onAir.sort((a, b) => b.popularity - a.popularity)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "2"
@@ -41,7 +41,7 @@ const OnAir = () => {
       setActive(
         active
           ? active.sort((a, b) => a.popularity - b.popularity)
-          : popular.sort((a, b) => a.popularity - b.popularity)
+          : onAir.sort((a, b) => a.popularity - b.popularity)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "3"
@@ -49,7 +49,7 @@ const OnAir = () => {
       setActive(
         active
           ? active.sort((a, b) => a.vote_average - b.vote_average)
-          : popular.sort((a, b) => a.vote_average - b.vote_average)
+          : onAir.sort((a, b) => a.vote_average - b.vote_average)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "4"
@@ -57,7 +57,7 @@ const OnAir = () => {
       setActive(
         active
           ? active.sort((a, b) => b.vote_average - a.vote_average)
-          : popular.sort((a, b) => b.vote_average - a.vote_average)
+          : onAir.sort((a, b) => b.vote_average - a.vote_average)
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "5"
@@ -67,7 +67,7 @@ const OnAir = () => {
           ? active.sort(
               (a, b) => new Date(a.release_date) - new Date(b.release_date)
             )
-          : popular.sort(
+          : onAir.sort(
               (a, b) => new Date(a.release_date) - new Date(b.release_date)
             )
       );
@@ -79,7 +79,7 @@ const OnAir = () => {
           ? active.sort(
               (a, b) => new Date(b.release_date) - new Date(a.release_date)
             )
-          : popular.sort(
+          : onAir.sort(
               (a, b) => new Date(b.release_date) - new Date(a.release_date)
             )
       );
@@ -89,7 +89,7 @@ const OnAir = () => {
       setActive(
         active
           ? active.sort((a, b) => (a.title < b.title ? -1 : 1))
-          : popular.sort((a, b) => (a.title < b.title ? -1 : 1))
+          : onAir.sort((a, b) => (a.title < b.title ? -1 : 1))
       );
     } else if (
       select.current.options[select.current.selectedIndex].value === "8"
@@ -97,7 +97,7 @@ const OnAir = () => {
       setActive(
         active
           ? active.sort((a, b) => (a.title > b.title ? -1 : 1))
-          : popular.sort((a, b) => (a.title > b.title ? -1 : 1))
+          : onAir.sort((a, b) => (a.title > b.title ? -1 : 1))
       );
     }
   };
@@ -106,16 +106,16 @@ const OnAir = () => {
     if (active) {
       setActive([...active, ...more]);
     } else {
-      setActive([...popular, ...more]);
+      setActive([...onAir, ...more]);
     }
   };
   return (
     <>
-      {popular ? (
+      {onAir ? (
         <PopularComponent>
           <Sorting>
             <div className="sortComponent">
-              <span>Popular Movies</span>
+              <span>On the air TV Series</span>
               <select ref={select} name="" id="" onChange={sortHandler}>
                 <option value="1">Popularity descending</option>
                 <option value="2">Popularity ascending</option>
@@ -130,16 +130,16 @@ const OnAir = () => {
           </Sorting>
           {active ? (
             <Movies>
-              {active.map((movie) => (
+              {active.map((tv) => (
                 <Link
-                  to={`/movie/${movie.id}`}
-                  key={movie.id}
+                  to={`/tv/${tv.id}`}
+                  key={tv.id}
                   style={{ textDecoration: "none" }}
                 >
                   <Card
-                    movieTitle={movie.title}
-                    key={movie.id}
-                    movieImage={movie.poster_path}
+                    tvTitle={tv.name}
+                    key={tv.id}
+                    movieImage={tv.poster_path}
                   />
                 </Link>
               ))}
@@ -149,16 +149,16 @@ const OnAir = () => {
             </Movies>
           ) : (
             <Movies>
-              {popular.map((movie) => (
+              {onAir.map((tv) => (
                 <Link
-                  to={`/movie/${movie.id}`}
-                  key={movie.id}
+                  to={`/tv/${tv.id}`}
+                  key={tv.id}
                   style={{ textDecoration: "none" }}
                 >
                   <Card
-                    movieTitle={movie.title}
-                    key={movie.id}
-                    movieImage={movie.poster_path}
+                    tvTitle={tv.name}
+                    key={tv.id}
+                    movieImage={tv.poster_path}
                   />
                 </Link>
               ))}
