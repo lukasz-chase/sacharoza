@@ -27,6 +27,7 @@ const MediaArticle = ({
   episodes,
   seasons,
   id,
+  network,
 }) => {
   //state
   const [externalIds, setExternalIds] = useState(null);
@@ -98,6 +99,18 @@ const MediaArticle = ({
           <p>Status</p>
           <p className="value">{status}</p>
         </Item>
+        {network && (
+          <Item>
+            <p>Networks</p>
+            {network.map((item) => (
+              <img
+                key={item.id}
+                src={getImageURL(500, item.logo_path)}
+                alt={item.name}
+              />
+            ))}
+          </Item>
+        )}
         {budget ? (
           <Item>
             <p>Budget</p>
@@ -140,7 +153,7 @@ const ArticleComponent = styled(motion.div)`
 `;
 const ArticleLeft = styled(motion.div)`
   width: 85%;
-  height: 48vh;
+  height: 44vh;
   display: flex;
   padding: 2rem 0rem;
   overflow-x: scroll;
@@ -206,6 +219,13 @@ const Item = styled(motion.div)`
   .value {
     font-weight: lighter;
     font-size: 1.5rem;
+  }
+  img {
+    display: flex;
+    flex-wrap: wrap;
+    width: 9rem;
+    height: 5rem;
+    object-fit: contain;
   }
 `;
 export default MediaArticle;

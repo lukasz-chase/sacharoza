@@ -13,6 +13,7 @@ import MediaBaner from "../components/MediaBaner";
 import MediaArticle from "../components/MediaArticle";
 import Trailers from "../components/Trailers";
 import Similar from "../components/Similar";
+import Season from "../components/Seasons";
 
 const TvShowDetails = () => {
   // state;
@@ -22,11 +23,10 @@ const TvShowDetails = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
   useEffect(() => {
-    axios.get(getMediaDetails("tv", pathId)).then((res) => setTvShow(res));
-    axios.get(getTvCredits("tv", pathId)).then((res) => setCredits(res));
+    axios.get(getMediaDetails("tv", pathId)).then((res) => setTvShow(res.data));
+    axios.get(getTvCredits("tv", pathId)).then((res) => setCredits(res.data));
     window.scrollTo(0, 0);
   }, [pathId]);
-
   return (
     <div>
       <Details>
@@ -34,32 +34,38 @@ const TvShowDetails = () => {
           <>
             <MediaBaner
               image={
-                tvshow.data.poster_path
-                  ? getImageURL(500, tvshow.data.poster_path)
+                tvshow.poster_path
+                  ? getImageURL(500, tvshow.poster_path)
                   : "https://piotrkowalski.pw/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png"
               }
-              title={tvshow.data.name}
-              date={tvshow.data.first_air_date}
-              year={tvshow.data.first_air_date.split("-")[0]}
-              genres={tvshow.data.genres}
-              overview={tvshow.data.overview}
-              rating={tvshow.data.vote_average}
-              tagline={tvshow.data.tagline}
-              director={credits.data.crew.filter(
+              title={tvshow.name}
+              date={tvshow.first_air_date}
+              year={tvshow.first_air_date.split("-")[0]}
+              genres={tvshow.genres}
+              overview={tvshow.overview}
+              rating={tvshow.vote_average}
+              tagline={tvshow.tagline}
+              director={credits.crew.filter(
                 (person) => person.job === "Director"
               )}
-              screenplay={credits.data.crew.filter(
+              screenplay={credits.crew.filter(
                 (person) => person.job === "Screenplay"
               )}
             />
             <MediaArticle
               id={pathId}
-              seasons={tvshow.data.number_of_seasons}
-              episodes={tvshow.data.number_of_episodes}
-              cast={credits.data.cast}
-              crew={credits.data.crew}
-              status={tvshow.data.status}
-              language={tvshow.data.original_language}
+              seasons={tvshow.number_of_seasons}
+              episodes={tvshow.number_of_episodes}
+              network={tvshow.networks}
+              cast={credits.cast}
+              crew={credits.crew}
+              status={tvshow.status}
+              language={tvshow.original_language}
+            />
+            <Season
+              id={pathId}
+              seasonsNumber={tvshow.number_of_seasons}
+              seasons={tvshow.seasons}
             />
           </>
         ) : (
@@ -73,6 +79,7 @@ const TvShowDetails = () => {
             allowFullScreen
           ></iframe>
         )}
+
         <Trailers media="tv" id={pathId} />
         <Similar media="tv" id={pathId} />
       </Details>

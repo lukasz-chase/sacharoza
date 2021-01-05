@@ -33,6 +33,8 @@ export const getOnAir = (media, page) =>
   `${baseUrl}3/${media}/on_the_air?api_key=${apiKey}&language=en-US&page=${page}`;
 export const getTodaysTv = (media, page) =>
   `${baseUrl}3/${media}/airing_today?api_key=${apiKey}&language=en-US&page=${page}`;
+export const getSeasons = (id, number) =>
+  `${baseUrl}3/tv/${id}/season/${number}?api_key=${apiKey}&language=en-US`;
 
 export const getExternalId = (media, id) =>
   `${baseUrl}3/${media}/${id}/external_ids?api_key=${apiKey}`;
