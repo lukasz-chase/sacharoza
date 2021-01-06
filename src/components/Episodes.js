@@ -16,7 +16,6 @@ const Episodes = ({ id, seasonsNumber }) => {
       .get(getSeasons(id, seasonsNumber))
       .then((res) => setSeason(res.data.episodes));
   }, [id, seasonsNumber]);
-  console.log(season);
   return (
     <>
       {season && (

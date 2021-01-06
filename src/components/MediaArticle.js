@@ -153,7 +153,7 @@ const ArticleComponent = styled(motion.div)`
 `;
 const ArticleLeft = styled(motion.div)`
   width: 85%;
-  height: 44vh;
+  height: 47vh;
   display: flex;
   padding: 2rem 0rem;
   overflow-x: scroll;

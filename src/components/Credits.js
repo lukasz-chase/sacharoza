@@ -49,7 +49,10 @@ const Credits = ({ cast, crew, creditsContainer }) => {
       <CrewComponent>
         <h1>Crew</h1>
         {crew.map((person) => (
-          <div className="person" key={person.credits_id}>
+          <div
+            className="person"
+            key={person.jobs ? person.jobs[0].credit_id : person.credit_id}
+          >
             <img
               src={
                 person.profile_path

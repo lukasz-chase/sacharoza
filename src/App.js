@@ -41,29 +41,29 @@ function App() {
       <Route path="/searched">
         <Searched searchedMovie={searchedMovie} searchedTv={searchedTv} />
       </Route>
-      <Route path="/popular/movies" exact>
+      <Route path="/movies/popular" exact>
         <PopularMovies />
       </Route>
-      <Route path="/upcoming/movies" exact>
+      <Route path="/movies/upcoming" exact>
         <UpcomingMovies />
       </Route>
-      <Route path="/top/movies" exact>
+      <Route path="/movies/top" exact>
         <TopRatedMovies />
-      </Route>
-      <Route path="/popular/tv" exact>
-        <PopularTv />
-      </Route>
-      <Route path="/on-air/tv" exact>
-        <OnAir />
-      </Route>
-      <Route path="/top/tv" exact>
-        <TopRatedTv />
-      </Route>
-      <Route path="/today/tv" exact>
-        <Today />
       </Route>
       <Route path="/movies/now-playing" exact>
         <NowPlayingMovies />
+      </Route>
+      <Route path="/tv-series/popular" exact>
+        <PopularTv />
+      </Route>
+      <Route path="/tv-series/on-air" exact>
+        <OnAir />
+      </Route>
+      <Route path="/tv-series/top" exact>
+        <TopRatedTv />
+      </Route>
+      <Route path="/tv-series/today" exact>
+        <Today />
       </Route>
       <Footer />
     </div>

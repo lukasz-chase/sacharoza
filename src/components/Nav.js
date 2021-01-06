@@ -59,13 +59,13 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
                 onMouseEnter={() => setMoviesHover(true)}
                 onMouseLeave={() => setMoviesHover(false)}
               >
-                <Link to="/popular/movies" style={{ padding: 0 }}>
+                <Link to="/movies/popular" style={{ padding: 0 }}>
                   <div className="list-item">Popular</div>
                 </Link>
-                <Link to="/upcoming/movies" style={{ padding: 0 }}>
+                <Link to="/movies/upcoming" style={{ padding: 0 }}>
                   <div className="list-item">Upcoming</div>
                 </Link>
-                <Link to="/top/movies" style={{ padding: 0 }}>
+                <Link to="/movies/top" style={{ padding: 0 }}>
                   <div className="list-item">Top Rated</div>
                 </Link>
                 <Link to="/movies/now-playing" style={{ padding: 0 }}>
@@ -90,16 +90,16 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
                 onMouseEnter={() => setTvHover(true)}
                 onMouseLeave={() => setTvHover(false)}
               >
-                <Link to="/popular/tv" style={{ padding: 0 }}>
+                <Link to="/tv-series/popular" style={{ padding: 0 }}>
                   <div className="list-item">Popular</div>
                 </Link>
-                <Link to="/today/tv" style={{ padding: 0 }}>
+                <Link to="/tv-series/today" style={{ padding: 0 }}>
                   <div className="list-item">Today in TV</div>
                 </Link>
-                <Link to="/on-air/tv" style={{ padding: 0 }}>
+                <Link to="/tv-series/on-air" style={{ padding: 0 }}>
                   <div className="list-item">On the air</div>
                 </Link>
-                <Link to="/top/tv" style={{ padding: 0 }}>
+                <Link to="/tv-series/top" style={{ padding: 0 }}>
                   <div className="list-item">Top Rated</div>
                 </Link>
               </div>

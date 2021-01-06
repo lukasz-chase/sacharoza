@@ -68,7 +68,7 @@ const Season = ({ id, seasonsNumber, seasons }) => {
 const SeasonsComponent = styled(motion.div)`
   width: 85%;
   padding: 0rem 1rem;
-  margin-top: -12vh;
+  margin-top: -10vh;
   font-size: 3rem;
   font-weight: bold;
   h1 {

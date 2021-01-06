@@ -31,8 +31,8 @@ const AllSeasons = ({ seasonsRef, seasons, id }) => {
         onClick={() => (seasonsRef.current.style.display = "none")}
       />
       {seasons.map((season) => (
-        <>
-          <SingleSeason key={season.id}>
+        <div key={season.name}>
+          <SingleSeason>
             <img
               src={
                 season.poster_path
@@ -51,7 +51,7 @@ const AllSeasons = ({ seasonsRef, seasons, id }) => {
           <Toggle state={true} arrowColor="white">
             <Episodes id={id} seasonsNumber={season.season_number}></Episodes>
           </Toggle>
-        </>
+        </div>
       ))}
     </SeasonsComponent>
   );
