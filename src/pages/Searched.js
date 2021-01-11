@@ -17,27 +17,24 @@ const Searched = ({ searchedMovie, searchedTv }) => {
     setActive(movies);
   }, [searchedMovie, searchedTv, movies]);
   //ref
-  const movieButton = useRef(null);
-  const tvButton = useRef(null);
+  const animateButton = useRef(null);
   //handlers
-  const buttonHandler = (currentBtn, media) => {
-    movieButton.current.classList.remove("active");
-    tvButton.current.classList.remove("active");
-    currentBtn.current.classList.add("active");
+  const buttonHandler = (number, media) => {
+    animateButton.current.style.transform = `translateX(${number})`;
     setActive(media);
   };
   return (
     <ResultContainer>
       <h1>Search Results</h1>
-      <button
-        ref={movieButton}
-        onClick={() => buttonHandler(movieButton, movies)}
-      >
-        {movies && movies.length} Movies
-      </button>
-      <button ref={tvButton} onClick={() => buttonHandler(tvButton, tvshows)}>
-        {tvshows && tvshows.length} Tv shows
-      </button>
+      <div className="buttons">
+        <ButtonComp ref={animateButton} className="animateColor"></ButtonComp>
+        <ButtonComp onClick={() => buttonHandler(0, movies)}>
+          {movies && movies.length} Movies
+        </ButtonComp>
+        <ButtonComp onClick={() => buttonHandler("100%", tvshows)}>
+          {tvshows && tvshows.length} Tv shows
+        </ButtonComp>
+      </div>
       {movies && active === movies && (
         <ResultList>
           {active.map((item) => (
@@ -79,25 +76,24 @@ const Searched = ({ searchedMovie, searchedTv }) => {
 };
 const ResultContainer = styled(motion.div)`
   transition: 1s ease-in;
+
   h1 {
     padding: 4rem 1rem;
   }
   .active {
-    background-color: #ebb15a;
   }
-  button {
+  .buttons {
+    display: flex;
     margin-left: 1rem;
-    font-size: 2rem;
     background-color: white;
-    border-radius: 1rem;
-    padding: 5px;
-
-    &:hover {
-      cursor: pointer;
-    }
-    &:focus {
-      outline: none;
-    }
+    border-radius: 1.2rem;
+    width: fit-content;
+  }
+  .animateColor {
+    position: absolute;
+    height: 5vh;
+    background-color: #ebb15a;
+    z-index: 1;
   }
 `;
 const ResultList = styled(motion.div)`
@@ -107,5 +103,18 @@ const ResultList = styled(motion.div)`
   flex-wrap: wrap;
   overflow-x: hidden;
 `;
-
+const ButtonComp = styled(motion.div)`
+  text-align: center;
+  height: 5vh;
+  width: 25vh;
+  font-size: 2rem;
+  border-radius: 1rem;
+  padding: 5px;
+  border: 1px solid black;
+  transition: 0.5s all ease-out;
+  z-index: 2;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 export default Searched;

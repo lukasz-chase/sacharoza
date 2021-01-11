@@ -25,6 +25,7 @@ const PageComponent = ({ api, media, title }) => {
     axios.get(api(media, number)).then((res) => setMore(res.data.results));
   }, [number, media, api]);
   //handlers
+
   const sortHandler = () => {
     window.scrollTo(0, 0);
     if (select.current.options[select.current.selectedIndex].value === "1") {
@@ -63,10 +64,14 @@ const PageComponent = ({ api, media, title }) => {
       setActive(
         active
           ? active.sort(
-              (a, b) => new Date(a.release_date) - new Date(b.release_date)
+              (a, b) =>
+                new Date(a.release_date ? a.release_date : a.first_air_date) -
+                new Date(b.release_date ? b.release_date : b.first_air_date)
             )
           : pageItem.sort(
-              (a, b) => new Date(a.release_date) - new Date(b.release_date)
+              (a, b) =>
+                new Date(a.release_date ? a.release_date : a.first_air_date) -
+                new Date(b.release_date ? b.release_date : b.first_air_date)
             )
       );
     } else if (
@@ -75,10 +80,14 @@ const PageComponent = ({ api, media, title }) => {
       setActive(
         active
           ? active.sort(
-              (a, b) => new Date(b.release_date) - new Date(a.release_date)
+              (a, b) =>
+                new Date(b.release_date ? b.release_date : b.first_air_date) -
+                new Date(a.release_date ? a.release_date : a.first_air_date)
             )
           : pageItem.sort(
-              (a, b) => new Date(b.release_date) - new Date(a.release_date)
+              (a, b) =>
+                new Date(b.release_date ? b.release_date : b.first_air_date) -
+                new Date(a.release_date ? a.release_date : a.first_air_date)
             )
       );
     } else if (

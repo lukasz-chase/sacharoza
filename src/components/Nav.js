@@ -127,6 +127,7 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
 };
 
 const Navbar = styled(motion.div)`
+  z-index: 3;
   position: fixed;
   width: 100%;
   min-height: 6vh;
