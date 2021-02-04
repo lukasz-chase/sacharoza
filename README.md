@@ -1,8 +1,10 @@
+you can check it live on: https://saharoza.vercel.app/
+
 To run this app on your computer follow these steps:
 
 1.run in your cmd - git clone  https://github.com/luki752/sacharoza.git
 
-2.when its cloned run in your command - npm install
+2.when its cloned run in your cmd - npm install
 
 3.after everything is installed you can run the project - npm start
 
@@ -19,4 +21,4 @@ And if you click on a move or tv show you get details related to it
 ![sacharoza4](https://user-images.githubusercontent.com/58302409/106915092-f18d5180-6705-11eb-8972-a1954397ca35.png)
 
 
-you can check it live on: https://saharoza.vercel.app/
+
