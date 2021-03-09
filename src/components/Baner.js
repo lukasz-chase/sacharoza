@@ -35,9 +35,6 @@ const BanerComponent = styled(motion.div)`
     rgba(89, 89, 179, 1) 36%,
     rgba(156, 153, 191, 1) 100%
   );
-  h1 {
-    padding: 1rem 0rem;
-  }
 `;
 const BanerStyled = styled(motion.div)`
   height: 100%;
@@ -45,12 +42,22 @@ const BanerStyled = styled(motion.div)`
   text-align: left;
   color: white;
   font-size: 2rem;
-
+  @media screen and (max-width: 1000px) {
+    font-size: 1rem;
+    width: 100%;
+  }
   span {
     color: #fd980d;
   }
   p {
     color: #e3c607;
+  }
+  h1,
+  h2 {
+    padding: 1rem 0rem;
+    @media screen and (max-width: 1000px) {
+      padding: 0.5rem 0;
+    }
   }
 `;
 export default Baner;

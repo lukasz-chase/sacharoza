@@ -5,19 +5,21 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 //import icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
 //import searchedUrl
 import { getSearchedMovie, getSearchedTv } from "../api";
 //import axios
 import axios from "axios";
 import { Link } from "react-router-dom";
+import NavMobileMenu from "./NavMobileMenu";
 
 const Nav = ({ setSearchedMovie, setSearchedTv }) => {
   //state
   const [textInput, setTextInput] = useState("");
   const [moviesHover, setMoviesHover] = useState(false);
   const [tvHover, setTvHover] = useState(false);
+  const [menu, setMenu] = useState(false);
   const history = useHistory();
   //handlers
   const inputHandler = (e) => {
@@ -30,10 +32,12 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
     const searchedTvURL = getSearchedTv(textInput);
     axios.get(searchedMovieURL).then((res) => setSearchedMovie(res));
     axios.get(searchedTvURL).then((res) => setSearchedTv(res));
+    history.push("/searched");
   };
   const pageHandler = (e) => {
     if (e.key === "Enter") {
       history.push("/searched");
+      submitSearch(e);
     }
   };
   return (
@@ -115,13 +119,22 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
             onKeyDown={pageHandler}
           />
 
-          <button onClick={submitSearch}>
-            <Link to="/searched" style={{ padding: "1rem" }}>
-              <FontAwesomeIcon className="search" icon={faSearch} />
-            </Link>
+          <button onClick={(e) => submitSearch(e)} className="search-icon">
+            <AiOutlineSearch />
           </button>
         </form>
       </RightNav>
+      <div className="menu-icon" onClick={() => setMenu(!menu)}>
+        {menu ? <AiOutlineClose /> : <GiHamburgerMenu />}
+      </div>
+      <NavMobileMenu
+        textInput={textInput}
+        inputHandler={inputHandler}
+        pageHandler={pageHandler}
+        submitSearch={submitSearch}
+        menu={menu}
+        setMenu={setMenu}
+      />
     </Navbar>
   );
 };
@@ -130,11 +143,10 @@ const Navbar = styled(motion.div)`
   z-index: 3;
   position: fixed;
   width: 100%;
-  min-height: 6vh;
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0rem 5rem;
   background-color: black;
   color: #e3ca0b;
   a {
@@ -151,6 +163,14 @@ const Navbar = styled(motion.div)`
     border-radius: 0.5rem;
     outline: none;
   }
+  .menu-icon {
+    display: none;
+    font-size: 2rem;
+    margin-right: 20px;
+    @media screen and (max-width: 1000px) {
+      display: block;
+    }
+  }
 `;
 const Links = styled(motion.div)`
   display: flex;
@@ -163,6 +183,20 @@ const Links = styled(motion.div)`
 const RightNav = styled(motion.div)`
   display: flex;
   justify-content: space-evenly;
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+  form {
+    position: relative;
+    .search-icon {
+      position: absolute;
+      right: 0;
+      background: none;
+      border: none;
+      top: 0;
+      font-size: 1.5rem;
+    }
+  }
 `;
 const Dropdown = styled(motion.div)`
   padding: 0rem 3rem;
