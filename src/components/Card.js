@@ -32,14 +32,24 @@ const StyledMovie = styled(motion.div)`
   transition: 0.5s ease-in;
   margin-right: 1rem;
   margin-top: 1rem;
+  @media screen and (max-width: 1000px) {
+    height: 30vh;
+    width: 17vh;
+  }
   p {
     color: black;
     font-size: 1rem;
+    @media screen and (max-width: 1000px) {
+      font-size: 0.5rem;
+    }
   }
   img {
     width: 100%;
     height: 43vh;
     object-fit: cover;
+    @media screen and (max-width: 1000px) {
+      height: 29vh;
+    }
   }
   &:hover {
     background-color: #fac601;

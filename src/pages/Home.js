@@ -157,13 +157,26 @@ const Media = styled(motion.div)`
   min-height: 45vh;
   display: flex;
   overflow-x: Scroll;
+  @media screen and (max-width: 1000px) {
+    min-height: 35vh;
+  }
 `;
 const ColumnHeader = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
   h1 {
     margin-right: 2vh;
+    &:first-letter {
+      text-transform: upperCase;
+    }
+    @media screen and (max-width: 1000px) {
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
   }
   button {
     border: none;

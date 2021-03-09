@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 //router
 import { Link } from "react-router-dom";
+import Toggle from "./Toggle";
 
 const NavMobileMenu = ({
   textInput,
@@ -39,47 +40,51 @@ const NavMobileMenu = ({
             </form>
           </li>
           <li className="header">Movies</li>
-          <li>
-            <Link to="/movies/popular" onClick={() => linkHandler()}>
-              Popular
-            </Link>
-          </li>
-          <li>
-            <Link to="/movies/upcoming" onClick={() => linkHandler()}>
-              Upcoming
-            </Link>
-          </li>
-          <li>
-            <Link to="/movies/top" onClick={() => linkHandler()}>
-              Top Rated
-            </Link>
-          </li>
-          <li>
-            <Link to="/movies/now-playing" onClick={() => linkHandler()}>
-              now playing
-            </Link>
-          </li>
+          <Toggle state={true}>
+            <li>
+              <Link to="/movies/popular" onClick={() => linkHandler()}>
+                Popular
+              </Link>
+            </li>
+            <li>
+              <Link to="/movies/upcoming" onClick={() => linkHandler()}>
+                Upcoming
+              </Link>
+            </li>
+            <li>
+              <Link to="/movies/top" onClick={() => linkHandler()}>
+                Top Rated
+              </Link>
+            </li>
+            <li>
+              <Link to="/movies/now-playing" onClick={() => linkHandler()}>
+                now playing
+              </Link>
+            </li>
+          </Toggle>
           <li className="header">TV Shows</li>
-          <li className="list-item">
-            <Link to="/tv-series/popular" onClick={() => linkHandler()}>
-              Popular
-            </Link>
-          </li>
-          <li className="list-item">
-            <Link to="/tv-series/today" onClick={() => linkHandler()}>
-              Today in TV
-            </Link>
-          </li>
-          <li className="list-item">
-            <Link to="/tv-series/on-air" onClick={() => linkHandler()}>
-              On the air
-            </Link>
-          </li>
-          <li className="list-item">
-            <Link to="/tv-series/top" onClick={() => linkHandler()}>
-              Top Rated
-            </Link>
-          </li>
+          <Toggle state={true}>
+            <li className="list-item">
+              <Link to="/tv-series/popular" onClick={() => linkHandler()}>
+                Popular
+              </Link>
+            </li>
+            <li className="list-item">
+              <Link to="/tv-series/today" onClick={() => linkHandler()}>
+                Today in TV
+              </Link>
+            </li>
+            <li className="list-item">
+              <Link to="/tv-series/on-air" onClick={() => linkHandler()}>
+                On the air
+              </Link>
+            </li>
+            <li className="list-item">
+              <Link to="/tv-series/top" onClick={() => linkHandler()}>
+                Top Rated
+              </Link>
+            </li>
+          </Toggle>
         </ul>
       </div>
     </MenuContainer>
@@ -91,7 +96,7 @@ const MenuContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: Center;
-    justify-content: Center;
+    justify-content: flex-start;
     width: 100%;
     height: 125vh;
     position: absolute;
@@ -114,8 +119,8 @@ const MenuContainer = styled.div`
             padding: 1rem;
           }
           .search-icon {
-            position: absolute;
-            right: 0;
+            position: static;
+            margin-left: -30px;
             background: none;
             border: none;
             top: 0;

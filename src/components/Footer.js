@@ -42,6 +42,10 @@ const FooterComponent = styled(motion.div)`
   margin: 2rem 0rem 0rem 0rem;
   padding: 2rem;
   background-color: #dbc168;
+  @media screen and (max-width: 1000px) {
+    width: 100vw;
+    font-size: 0.4rem;
+  }
   ul {
     list-style: none;
     padding: 0rem 2rem;
