@@ -36,7 +36,7 @@ const Footer = () => {
 const FooterComponent = styled(motion.div)`
   min-height: 10vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   color: black;
   font-size: 1rem;
   margin: 2rem 0rem 0rem 0rem;
@@ -44,12 +44,11 @@ const FooterComponent = styled(motion.div)`
   background-color: #dbc168;
   @media screen and (max-width: 1000px) {
     width: 100vw;
-    font-size: 0.4rem;
+    font-size: 0.6rem;
+    margin: 0;
   }
   ul {
     list-style: none;
-    padding: 0rem 2rem;
-  }
   li:first-child {
     font-weight: bold;
   }
