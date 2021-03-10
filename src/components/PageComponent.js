@@ -282,6 +282,10 @@ const Movies = styled(motion.div)`
     cursor: pointer;
     background-color: #f7df7e;
     transition: 0.3s all ease-in;
+    @media screen and (max-width: 1000px) {
+      font-size: 3vh;
+      height: 7vh;
+    }
     &:hover {
       background-color: #f7cd43;
     }

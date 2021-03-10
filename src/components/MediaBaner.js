@@ -121,7 +121,7 @@ const SmallDetails = styled(motion.div)`
   width: 55%;
   padding: 1rem 2rem;
   @media screen and (max-width: 1000px) {
-    width: 100%;
+    width: 100vw;
     padding: 1rem;
   }
   h1 {
@@ -136,6 +136,9 @@ const UnderTitle = styled(motion.div)`
   display: flex;
   font-size: 1rem;
   font-weight: lighter;
+  @media screen and (max-width: 1000px) {
+    flex-wrap: wrap;
+  }
   .date {
     margin-right: 1vh;
   }

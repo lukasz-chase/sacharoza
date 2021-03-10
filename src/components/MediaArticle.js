@@ -164,13 +164,13 @@ const ArticleLeft = styled(motion.div)`
   margin-left: 1rem;
   margin-top: 5rem;
   @media screen and (max-width: 1000px) {
-    height: 12rem;
+    height: 15rem;
     width: 95%;
   }
   .cast {
     display: flex;
     @media screen and (max-width: 1000px) {
-      height: 10rem;
+      height: 20rem;
     }
   }
   .arrow {
@@ -180,6 +180,10 @@ const ArticleLeft = styled(motion.div)`
     align-self: center;
     &:hover {
       cursor: pointer;
+    }
+    @media screen and (max-width: 1000px) {
+      font-size: 5rem;
+      margin-bottom: 6rem;
     }
   }
 `;
@@ -208,13 +212,13 @@ const Cast = styled(motion.div)`
   @media screen and (max-width: 1000px) {
     margin-top: 0;
     width: 10vh;
-    height: 100%;
+    height: 16rem;
   }
   p {
     color: black;
     @media screen and (max-width: 1000px) {
       font-size: 0.8rem;
-      height: 2%;
+      min-height: 6%;
     }
   }
   img {

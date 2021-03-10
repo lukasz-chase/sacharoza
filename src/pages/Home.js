@@ -95,6 +95,7 @@ const Home = () => {
                 to={`/movie/${movie.id}`}
                 key={movie.id}
                 style={{ textDecoration: "none" }}
+                onClick={() => window.scrollTo(0, 0)}
               >
                 <Card
                   movieTitle={movie.title}
@@ -136,6 +137,7 @@ const Home = () => {
                 to={`/tv/${tvshow.id}`}
                 key={tvshow.id}
                 style={{ textDecoration: "none" }}
+                onClick={() => window.scrollTo(0, 0)}
               >
                 <Card
                   movieTitle={tvshow.name}
