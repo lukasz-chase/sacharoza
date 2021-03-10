@@ -117,7 +117,13 @@ const ButtonComp = styled(motion.div)`
   z-index: 2;
   @media screen and (max-width: 1000px) {
     width: 20vh;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media screen and (max-height: 500px) {
+    font-size: 0.6rem;
   }
   &:hover {
     cursor: pointer;
