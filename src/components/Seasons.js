@@ -71,6 +71,11 @@ const SeasonsComponent = styled(motion.div)`
   margin-top: -10vh;
   font-size: 3rem;
   font-weight: bold;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 0;
+  }
   h1 {
     font-size: 1.5rem;
     font-weight: lighter;
@@ -85,18 +90,33 @@ const LatestSeason = styled(motion.div)`
     height: 100%;
     width: 25vh;
     object-fit: cover;
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+      font-size: 1rem;
+      height: 8rem;
+      width: 7rem;
+    }
   }
   .seasonInfo {
     padding: 1rem;
+    @media screen and (max-width: 1000px) {
+      padding: 0.5rem;
+    }
     p {
       font-size: 1.5rem;
       font-weight: lighter;
+      @media screen and (max-width: 1000px) {
+        font-size: 1rem;
+      }
     }
   }
   .line {
     margin-left: 7rem;
     height: 30vh;
     border: 1px solid black;
+    @media screen and (max-width: 1000px) {
+      display: none;
+    }
   }
   .rest {
     margin-left: 2rem;

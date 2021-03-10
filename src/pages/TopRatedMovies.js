@@ -10,6 +10,7 @@ const PopularTv = () => {
       api={getTopRatedMedia}
       media={"movie"}
       title={"Top rated Movies"}
+      movie
     ></PageComponent>
   );
 };

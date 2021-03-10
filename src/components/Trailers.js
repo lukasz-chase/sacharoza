@@ -27,38 +27,36 @@ const Trailers = ({ id, media }) => {
               ? "Official Trailer"
               : ""}{" "}
           </h1>
-          {videos.data.results
-            .filter((video) => video.name.includes("Official"))
-            .map((video) => (
-              <p key={video.id}>
-                <iframe
-                  title={video.id}
-                  width="900"
-                  height="375"
-                  src={`https://www.youtube.com/embed/${video.key}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </p>
-            ))}
+          <div className="trailers">
+            {videos.data.results
+              .filter((video) => video.name.includes("Official"))
+              .map((video) => (
+                <div className="wrapper" key={video.id}>
+                  <iframe
+                    title={video.id}
+                    className="responsive-iframe"
+                    src={`https://www.youtube.com/embed/${video.key}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              ))}
+          </div>
           <h1>{videos.data.results.length > 1 ? "Videos" : ""}</h1>
           {videos.data.results.length > 1 ? (
             <Toggle state={true}>
               <VideosComponent>
                 {videos.data.results.slice(1).map((video) => (
-                  <p key={video.id}>
+                  <div className="wrapper" key={video.id}>
                     <iframe
-                      className="videosClass"
+                      className="responsive-iframe"
                       title={video.id}
-                      width="400"
-                      height="245"
                       src={`https://www.youtube.com/embed/${video.key}`}
-                      frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     ></iframe>
-                  </p>
+                  </div>
                 ))}
               </VideosComponent>
             </Toggle>
@@ -80,15 +78,39 @@ const TrailersComponent = styled(motion.div)`
   h1 {
     padding: 1rem 0rem;
   }
+  .trailers {
+    display: flex;
+    flex-wrap: wrap;
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
+    }
+    .wrapper {
+      .responsive-iframe {
+        margin: 0rem 1rem;
+      }
+    }
+  }
 `;
 const VideosComponent = styled(motion.div)`
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 1rem 0rem;
-  .videosClass {
-    margin: 1rem;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
+  .wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+    width: 20rem;
+    .responsive-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0rem 1rem;
+    }
   }
 `;
 

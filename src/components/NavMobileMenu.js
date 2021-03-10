@@ -104,19 +104,20 @@ const MenuContainer = styled.div`
     left: -100%;
     opacity: 1;
     transition: all 0.5s ease;
+    overflow: auto;
     ul {
       list-style: none;
       text-align: center;
       .header {
-        font-size: 3rem;
+        font-size: 1.6rem;
       }
       li {
-        font-size: 2rem;
-        padding: 1rem;
+        font-size: 1.5rem;
+        padding: 0.5rem;
         form {
           position: relative;
           input {
-            padding: 1rem;
+            padding: 0.5rem;
           }
           .search-icon {
             position: static;

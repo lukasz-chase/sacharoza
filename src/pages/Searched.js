@@ -76,11 +76,8 @@ const Searched = ({ searchedMovie, searchedTv }) => {
 };
 const ResultContainer = styled(motion.div)`
   transition: 1s ease-in;
-
   h1 {
-    padding: 4rem 1rem;
-  }
-  .active {
+    padding: 5rem 0rem 1rem 1rem;
   }
   .buttons {
     display: flex;
@@ -102,6 +99,11 @@ const ResultList = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   overflow-x: hidden;
+  @media screen and (max-width: 1000px) {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const ButtonComp = styled(motion.div)`
   text-align: center;
@@ -113,6 +115,10 @@ const ButtonComp = styled(motion.div)`
   border: 1px solid black;
   transition: 0.5s all ease-out;
   z-index: 2;
+  @media screen and (max-width: 1000px) {
+    width: 20vh;
+    font-size: 1.5rem;
+  }
   &:hover {
     cursor: pointer;
   }

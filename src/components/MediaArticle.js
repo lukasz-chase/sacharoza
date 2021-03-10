@@ -144,6 +144,9 @@ const MediaArticle = ({
 };
 const ArticleComponent = styled(motion.div)`
   display: flex;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
   h1 {
     position: absolute;
     left: 50%;
@@ -160,8 +163,15 @@ const ArticleLeft = styled(motion.div)`
   overflow-y: hidden;
   margin-left: 1rem;
   margin-top: 5rem;
+  @media screen and (max-width: 1000px) {
+    height: 12rem;
+    width: 95%;
+  }
   .cast {
     display: flex;
+    @media screen and (max-width: 1000px) {
+      height: 10rem;
+    }
   }
   .arrow {
     color: black;
@@ -178,6 +188,12 @@ const ArticleRight = styled(motion.div)`
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem;
+  @media screen and (max-width: 1000px) {
+    padding: 1rem 1rem;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;
 
 const Cast = styled(motion.div)`
@@ -189,13 +205,24 @@ const Cast = styled(motion.div)`
   transition: 0.5s ease-in;
   margin-right: 1rem;
   margin-top: 1rem;
+  @media screen and (max-width: 1000px) {
+    margin-top: 0;
+    width: 10vh;
+    height: 100%;
+  }
   p {
     color: black;
+    @media screen and (max-width: 1000px) {
+      font-size: 0.8rem;
+      height: 2%;
+    }
   }
   img {
-    height: 30vh;
     width: 20vh;
     object-fit: cover;
+    @media screen and (max-width: 1000px) {
+      width: 10vh;
+    }
   }
 `;
 const SocialMedia = styled(motion.div)`
@@ -212,13 +239,22 @@ const SocialMedia = styled(motion.div)`
 `;
 const Item = styled(motion.div)`
   padding: 1rem 0rem;
+  @media screen and (max-width: 1000px) {
+    padding: 0.5rem;
+  }
   p {
     font-size: 2rem;
     font-weight: bold;
+    @media screen and (max-width: 1000px) {
+      font-size: 1.5rem;
+    }
   }
   .value {
     font-weight: lighter;
     font-size: 1.5rem;
+    @media screen and (max-width: 1000px) {
+      font-size: 1rem;
+    }
   }
   img {
     display: flex;
@@ -226,6 +262,10 @@ const Item = styled(motion.div)`
     width: 7rem;
     height: 3rem;
     object-fit: contain;
+    @media screen and (max-width: 1000px) {
+      width: 4rem;
+      height: 2rem;
+    }
   }
 `;
 export default MediaArticle;

@@ -89,12 +89,25 @@ const CrewComponent = styled(motion.div)`
   background-color: white;
   position: absolute;
   left: 10%;
+  @media screen and (max-width: 1000px) {
+    left: 0;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    padding-top: 5rem;
+  }
   img {
     height: 10vh;
     width: 7vh;
   }
   .person {
     display: flex;
+    @media screen and (max-width: 1000px) {
+      padding-top: 0.5rem;
+    }
   }
   h1 {
     position: absolute;
@@ -103,19 +116,30 @@ const CrewComponent = styled(motion.div)`
 `;
 const CastComponent = styled(motion.div)`
   width: 40%;
-  border-radius: 1rem;
   padding: 2rem 5rem;
   background: white;
   position: absolute;
   left: 50%;
   color: black;
   z-index: 10;
+  @media screen and (max-width: 1000px) {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    padding-top: 5rem;
+  }
   img {
     height: 10vh;
     width: 7vh;
   }
   .person {
     display: flex;
+    @media screen and (max-width: 1000px) {
+      padding-top: 0.5rem;
+    }
   }
   .closeTag {
     position: absolute;

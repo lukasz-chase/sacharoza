@@ -9,7 +9,7 @@ import Card from "../components/Card";
 //link
 import { Link } from "react-router-dom";
 
-const PageComponent = ({ api, media, title }) => {
+const PageComponent = ({ api, media, title, movie }) => {
   // state
   const [pageItem, SetPageItem] = useState(null);
   const [active, setActive] = useState(null);
@@ -26,6 +26,7 @@ const PageComponent = ({ api, media, title }) => {
   }, [number, media, api]);
   //handlers
 
+  // console.log(pageItem);
   const sortHandler = () => {
     window.scrollTo(0, 0);
     if (select.current.options[select.current.selectedIndex].value === "1") {
@@ -93,19 +94,43 @@ const PageComponent = ({ api, media, title }) => {
     } else if (
       select.current.options[select.current.selectedIndex].value === "7"
     ) {
-      setActive(
-        active
-          ? active.sort((a, b) => (a.title < b.title ? -1 : 1))
-          : pageItem.sort((a, b) => (a.title < b.title ? -1 : 1))
-      );
+      if (movie) {
+        setActive(
+          active
+            ? active.sort((a, b) => (a.title < b.title ? -1 : 1))
+            : pageItem.sort((a, b) => (a.title < b.title ? -1 : 1))
+        );
+      } else {
+        setActive(
+          active
+            ? active.sort((a, b) =>
+                a.original_name < b.original_name ? -1 : 1
+              )
+            : pageItem.sort((a, b) =>
+                a.original_name < b.original_name ? -1 : 1
+              )
+        );
+      }
     } else if (
       select.current.options[select.current.selectedIndex].value === "8"
     ) {
-      setActive(
-        active
-          ? active.sort((a, b) => (a.title > b.title ? -1 : 1))
-          : pageItem.sort((a, b) => (a.title > b.title ? -1 : 1))
-      );
+      if (movie) {
+        setActive(
+          active
+            ? active.sort((a, b) => (a.title > b.title ? -1 : 1))
+            : pageItem.sort((a, b) => (a.title > b.title ? -1 : 1))
+        );
+      } else {
+        setActive(
+          active
+            ? active.sort((a, b) =>
+                a.original_name > b.original_name ? -1 : 1
+              )
+            : pageItem.sort((a, b) =>
+                a.original_name > b.original_name ? -1 : 1
+              )
+        );
+      }
     }
   };
   const ShowMoreHandler = () => {
@@ -196,10 +221,16 @@ const PageComponent = ({ api, media, title }) => {
 const PopularComponent = styled(motion.div)`
   display: flex;
   padding: 5rem 0rem;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
 `;
 const Sorting = styled(motion.div)`
   width: 20%;
   text-align:center;
+  @media screen and (max-width: 1000px) {
+    width:100%;
+  }
   .sortComponent {
     position:fixed;
     left:5%;
@@ -207,6 +238,12 @@ const Sorting = styled(motion.div)`
     align-items: flex-end;
     flex-direction: column;
     font-size: 3vh;
+    @media screen and (max-width: 1000px) {
+    position:inherit;
+    align-items:center;
+    justify-content:center;
+    font-size:2rem;
+  }
     select {
       margin-top: 1rem;
       padding: 0.5rem 0rem;
@@ -231,6 +268,9 @@ const Movies = styled(motion.div)`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
   .loadMore {
     position: relative;
     margin-top: 2vh;

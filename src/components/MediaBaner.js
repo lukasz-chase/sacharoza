@@ -79,6 +79,9 @@ const MediaBanerComponent = styled(motion.div)`
   display: flex;
   width: 100%;
   background-color: #f2c366;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
   .rating {
     padding: 1rem 0rem;
     display: flex;
@@ -94,10 +97,20 @@ const Poster = styled(motion.div)`
   display: flex;
   justify-content: flex-end;
   padding: 7rem 0rem;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    justify-content: Center;
+    padding: 0;
+    padding-top: 5rem;
+  }
   img {
     height: 48vh;
     width: 30vh;
     object-fit: cover;
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+      height: 60vh;
+    }
   }
 `;
 const SmallDetails = styled(motion.div)`
@@ -107,9 +120,16 @@ const SmallDetails = styled(motion.div)`
   flex-direction: column;
   width: 55%;
   padding: 1rem 2rem;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    padding: 1rem;
+  }
   h1 {
     font-size: 3rem;
     font-weight: bold;
+    @media screen and (max-width: 1000px) {
+      font-size: 2rem;
+    }
   }
 `;
 const UnderTitle = styled(motion.div)`
@@ -126,6 +146,9 @@ const UnderTitle = styled(motion.div)`
 `;
 const Overview = styled(motion.div)`
   padding: 1rem 0rem;
+  @media screen and (max-width: 1000px) {
+    padding: 0;
+  }
   h4 {
     padding: 1rem 0rem;
     font-style: italic;

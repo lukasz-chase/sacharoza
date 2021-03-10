@@ -10,6 +10,7 @@ const NowPlayingMovies = () => {
       api={getNowPlayingMedia}
       media={"movie"}
       title={"Now playing Movies"}
+      movie
     ></PageComponent>
   );
 };

@@ -42,10 +42,10 @@ const BanerStyled = styled(motion.div)`
   text-align: left;
   color: white;
   font-size: 2rem;
+  margin-top: 3rem;
   @media screen and (max-width: 1000px) {
     font-size: 1rem;
     text-align: center;
-    margin-top: 3rem;
     width: 100%;
   }
   span {

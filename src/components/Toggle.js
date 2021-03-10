@@ -22,7 +22,7 @@ const Toggle = ({ children, state, arrowColor }) => {
 };
 const ToggleContainer = styled(motion.div)`
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
   &:hover {
     cursor: pointer;
   }

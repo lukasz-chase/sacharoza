@@ -32,6 +32,7 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
     const searchedTvURL = getSearchedTv(textInput);
     axios.get(searchedMovieURL).then((res) => setSearchedMovie(res));
     axios.get(searchedTvURL).then((res) => setSearchedTv(res));
+    setMenu(false);
     history.push("/searched");
   };
   const pageHandler = (e) => {

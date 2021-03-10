@@ -67,6 +67,9 @@ const SeasonsComponent = styled(motion.div)`
   left: 0;
   z-index: 5;
   display: none;
+  @media screen and (max-width: 1000px) {
+    padding-top: 6rem;
+  }
   .closeTag {
     position: fixed;
     top: 0;
@@ -90,10 +93,24 @@ const SingleSeason = styled(motion.div)`
   position: relative;
   margin-top: 1vh;
   left: 10%;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    left: 0;
+  }
   img {
     height: 30vh;
     width: 20vh;
     object-fit: cover;
+    @media screen and (max-width: 1000px) {
+      height: 20vh;
+      width: 15vh;
+    }
+  }
+  .seasonInfo {
+    margin-left: 1rem;
+    @media screen and (max-width: 1000px) {
+      margin-left: 0.5rem;
+    }
   }
 `;
 

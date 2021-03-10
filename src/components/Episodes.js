@@ -55,6 +55,11 @@ const SingleEpisode = styled(motion.div)`
   left: 10%;
   font-weight: bold;
   font-size: 1rem;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    left: 0;
+    font-size: 0.8rem;
+  }
   img {
     height: 20vh;
     width: 15vh;
