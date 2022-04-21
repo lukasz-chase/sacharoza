@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 //import components
-import Card from "../components/Card";
+import Slider from "../components/Slider";
 //import styles and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
-//router
-import { Link } from "react-router-dom";
 
 const Searched = ({ searchedMovie, searchedTv }) => {
   const [movies, setMovies] = useState(null);
@@ -36,40 +34,15 @@ const Searched = ({ searchedMovie, searchedTv }) => {
         </ButtonComp>
       </div>
       {movies && active === movies && (
-        <ResultList>
-          {active.map((item) => (
-            <Link
-              key={item.id}
-              to={`/movie/${item.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Card
-                key={item.id}
-                movieTitle={item.title}
-                movieImage={item.poster_path}
-              />
-            </Link>
-          ))}
-        </ResultList>
+        <Slider
+          media="movie"
+          items={movies}
+          flexWrap="wrap"
+          overflowX="hidden"
+        />
       )}
-
       {tvshows && active === tvshows && (
-        <ResultList>
-          {active.map((item) => (
-            <Link
-              key={item.id}
-              to={`/tv/${item.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Card
-                key={item.id}
-                movieTitle={item.title}
-                tvTitle={item.name}
-                movieImage={item.poster_path}
-              />
-            </Link>
-          ))}
-        </ResultList>
+        <Slider media="tv" items={tvshows} flexWrap="wrap" overflowX="hidden" />
       )}
     </ResultContainer>
   );
@@ -91,18 +64,6 @@ const ResultContainer = styled(motion.div)`
     height: 5vh;
     background-color: #ebb15a;
     z-index: 1;
-  }
-`;
-const ResultList = styled(motion.div)`
-  min-height: 30vh;
-  padding: 0vh 2vh;
-  display: flex;
-  flex-wrap: wrap;
-  overflow-x: hidden;
-  @media screen and (max-width: 1000px) {
-    padding: 0;
-    justify-content: center;
-    align-items: center;
   }
 `;
 const ButtonComp = styled(motion.div)`

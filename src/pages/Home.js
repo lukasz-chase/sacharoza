@@ -3,12 +3,11 @@ import axios from "axios";
 //getting url
 import { getTrendingMedia } from "../api";
 //importing components
-import Card from "../components/Card";
 import Baner from "../components/Baner";
+import Slider from "../components/Slider";
 //styling and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 
 const Home = () => {
   //state
@@ -87,26 +86,7 @@ const Home = () => {
           </button>
         </ButtonsStyle>
       </ColumnHeader>
-      <Media>
-        {trendingMovie && (
-          <>
-            {trendingMovie.map((movie) => (
-              <Link
-                to={`/movie/${movie.id}`}
-                key={movie.id}
-                style={{ textDecoration: "none" }}
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <Card
-                  movieTitle={movie.title}
-                  key={movie.id}
-                  movieImage={movie.poster_path}
-                />
-              </Link>
-            ))}
-          </>
-        )}
-      </Media>
+      <Slider media="movie" items={trendingMovie} />
       <ColumnHeader>
         <h1>trending tv shows:</h1>
         <ButtonsStyle>
@@ -129,40 +109,14 @@ const Home = () => {
           </button>
         </ButtonsStyle>
       </ColumnHeader>
-      <Media>
-        {trendingTv && (
-          <>
-            {trendingTv.map((tvshow) => (
-              <Link
-                to={`/tv/${tvshow.id}`}
-                key={tvshow.id}
-                style={{ textDecoration: "none" }}
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <Card
-                  movieTitle={tvshow.name}
-                  key={tvshow.id}
-                  movieImage={tvshow.poster_path}
-                />
-              </Link>
-            ))}
-          </>
-        )}
-      </Media>
+      <Slider items={trendingTv} />
     </StyledHome>
   );
 };
 const StyledHome = styled(motion.div)`
   width: 100%;
 `;
-const Media = styled(motion.div)`
-  min-height: 45vh;
-  display: flex;
-  overflow-x: Scroll;
-  @media screen and (max-width: 1000px) {
-    min-height: 35vh;
-  }
-`;
+
 const ColumnHeader = styled(motion.div)`
   display: flex;
   justify-content: center;

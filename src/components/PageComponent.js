@@ -1,208 +1,132 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 //import axios
 import axios from "axios";
 //styling
 import styled from "styled-components";
 import { motion } from "framer-motion";
 //import components
-import Card from "../components/Card";
-//link
-import { Link } from "react-router-dom";
+import Slider from "./Slider";
+//data
+import { sortingItems, options } from "../descriptions/sortingItems";
+//icons
+import { MdArrowDropDown } from "react-icons/md";
 
-const PageComponent = ({ api, media, title, movie }) => {
+const PageComponent = ({ api, media, title }) => {
   // state
-  const [pageItem, SetPageItem] = useState(null);
-  const [active, setActive] = useState(null);
+  const [pageItem, SetPageItem] = useState([]);
+  const [activeItem, setActiveItem] = useState([]);
   const [more, setMore] = useState(null);
+  const [dropdown, setDropdown] = useState(null);
+  const [dropdownTitle, setDropDownTitle] = useState("Popularity ascending");
   let [number, setNumber] = useState(2);
-  //Ref
-  const select = useRef(null);
   //get apis response
   useEffect(() => {
     axios.get(api(media, "1")).then((res) => SetPageItem(res.data.results));
-  }, [pageItem, media, api]);
+  }, [media, api]);
   useEffect(() => {
     axios.get(api(media, number)).then((res) => setMore(res.data.results));
   }, [number, media, api]);
-  //handlers
 
-  // console.log(pageItem);
-  const sortHandler = () => {
-    window.scrollTo(0, 0);
-    if (select.current.options[select.current.selectedIndex].value === "1") {
-      setActive(
-        active
-          ? active.sort((a, b) => b.popularity - a.popularity)
-          : pageItem.sort((a, b) => b.popularity - a.popularity)
-      );
-    } else if (
-      select.current.options[select.current.selectedIndex].value === "2"
-    ) {
-      setActive(
-        active
-          ? active.sort((a, b) => a.popularity - b.popularity)
-          : pageItem.sort((a, b) => a.popularity - b.popularity)
-      );
-    } else if (
-      select.current.options[select.current.selectedIndex].value === "3"
-    ) {
-      setActive(
-        active
-          ? active.sort((a, b) => a.vote_average - b.vote_average)
-          : pageItem.sort((a, b) => a.vote_average - b.vote_average)
-      );
-    } else if (
-      select.current.options[select.current.selectedIndex].value === "4"
-    ) {
-      setActive(
-        active
-          ? active.sort((a, b) => b.vote_average - a.vote_average)
-          : pageItem.sort((a, b) => b.vote_average - a.vote_average)
-      );
-    } else if (
-      select.current.options[select.current.selectedIndex].value === "5"
-    ) {
-      setActive(
-        active
-          ? active.sort(
-              (a, b) =>
-                new Date(a.release_date ? a.release_date : a.first_air_date) -
-                new Date(b.release_date ? b.release_date : b.first_air_date)
-            )
-          : pageItem.sort(
-              (a, b) =>
-                new Date(a.release_date ? a.release_date : a.first_air_date) -
-                new Date(b.release_date ? b.release_date : b.first_air_date)
-            )
-      );
-    } else if (
-      select.current.options[select.current.selectedIndex].value === "6"
-    ) {
-      setActive(
-        active
-          ? active.sort(
-              (a, b) =>
-                new Date(b.release_date ? b.release_date : b.first_air_date) -
-                new Date(a.release_date ? a.release_date : a.first_air_date)
-            )
-          : pageItem.sort(
-              (a, b) =>
-                new Date(b.release_date ? b.release_date : b.first_air_date) -
-                new Date(a.release_date ? a.release_date : a.first_air_date)
-            )
-      );
-    } else if (
-      select.current.options[select.current.selectedIndex].value === "7"
-    ) {
-      if (movie) {
-        setActive(
-          active
-            ? active.sort((a, b) => (a.title < b.title ? -1 : 1))
-            : pageItem.sort((a, b) => (a.title < b.title ? -1 : 1))
-        );
-      } else {
-        setActive(
-          active
-            ? active.sort((a, b) =>
-                a.original_name < b.original_name ? -1 : 1
-              )
-            : pageItem.sort((a, b) =>
-                a.original_name < b.original_name ? -1 : 1
-              )
-        );
-      }
-    } else if (
-      select.current.options[select.current.selectedIndex].value === "8"
-    ) {
-      if (movie) {
-        setActive(
-          active
-            ? active.sort((a, b) => (a.title > b.title ? -1 : 1))
-            : pageItem.sort((a, b) => (a.title > b.title ? -1 : 1))
-        );
-      } else {
-        setActive(
-          active
-            ? active.sort((a, b) =>
-                a.original_name > b.original_name ? -1 : 1
-              )
-            : pageItem.sort((a, b) =>
-                a.original_name > b.original_name ? -1 : 1
-              )
-        );
-      }
-    }
-  };
+  //handlers
   const ShowMoreHandler = () => {
     setNumber(number + 1);
-    if (active) {
-      setActive([...active, ...more]);
+    setActiveItem(
+      activeItem.length === 0
+        ? [...pageItem, ...more]
+        : [...activeItem, ...more]
+    );
+  };
+  const setSortHandler = ({ label, sortType, sortOrder }) => {
+    setDropdown(false);
+    setDropDownTitle(label);
+    const sortProperty = options[sortType];
+    if (sortProperty === "release_date") {
+      if (sortOrder === "asc") {
+        setActiveItem(
+          [...pageItem].sort(
+            (a, b) =>
+              new Date(a.release_date ? a.release_date : a.first_air_date) -
+              new Date(b.release_date ? b.release_date : b.first_air_date)
+          )
+        );
+      } else {
+        setActiveItem(
+          [...pageItem].sort(
+            (a, b) =>
+              new Date(b.release_date ? b.release_date : b.first_air_date) -
+              new Date(a.release_date ? a.release_date : a.first_air_date)
+          )
+        );
+      }
     } else {
-      setActive([...pageItem, ...more]);
+      if (sortOrder === "asc") {
+        setActiveItem(
+          [...pageItem].sort((a, b) => b[sortProperty] - a[sortProperty])
+        );
+      } else {
+        setActiveItem(
+          [...pageItem].sort((a, b) => a[sortProperty] - b[sortProperty])
+        );
+      }
     }
   };
+
   return (
     <>
       {pageItem ? (
         <PopularComponent>
           <Sorting>
-            <div className="sortComponent">
-              <span>{title}</span>
-              <select ref={select} name="" id="" onChange={sortHandler}>
-                <option value="1">Popularity descending</option>
-                <option value="2">Popularity ascending</option>
-                <option value="3">Vote descending</option>
-                <option value="4">Vote ascending</option>
-                <option value="5">Date descending</option>
-                <option value="6">Date ascending</option>
-                <option value="7">Title (A-Z)</option>
-                <option value="8">Title (Z-A)</option>
-              </select>
+            <span className="title">{title}</span>
+            <div className="dd-wrapper">
+              <div
+                className="dd-header"
+                onClick={() => setDropdown((prev) => !prev)}
+              >
+                <div className="dd-header-title">
+                  {dropdownTitle}
+                  <MdArrowDropDown size="3em" />
+                </div>
+              </div>
+              <div
+                className="dd-list"
+                style={{ display: dropdown ? "flex" : "none" }}
+              >
+                {sortingItems.map((item) => (
+                  <button
+                    key={item.label}
+                    className="dd-list-item"
+                    onClick={() => setSortHandler(item)}
+                    style={{
+                      backgroundColor:
+                        dropdownTitle === item.label ? "#f7cd43" : "",
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </Sorting>
-          {active ? (
-            <Movies>
-              {active.map((mediaItem) => (
-                <Link
-                  to={`/${media}/${mediaItem.id}`}
-                  key={mediaItem.id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Card
-                    movieTitle={
-                      mediaItem.title ? mediaItem.title : mediaItem.name
-                    }
-                    key={mediaItem.id}
-                    movieImage={mediaItem.poster_path}
-                  />
-                </Link>
-              ))}
-              <button className="loadMore" onClick={ShowMoreHandler}>
-                Load More
-              </button>
-            </Movies>
-          ) : (
-            <Movies>
-              {pageItem.map((mediaItem) => (
-                <Link
-                  to={`/${media}/${mediaItem.id}`}
-                  key={mediaItem.id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Card
-                    movieTitle={
-                      mediaItem.title ? mediaItem.title : mediaItem.name
-                    }
-                    key={mediaItem.id}
-                    movieImage={mediaItem.poster_path}
-                  />
-                </Link>
-              ))}
-              <button className="loadMore" onClick={ShowMoreHandler}>
-                Load More
-              </button>
-            </Movies>
-          )}
+          <div style={{ width: "100%" }}>
+            {activeItem.length === 0 ? (
+              <Slider
+                media={media}
+                items={pageItem}
+                flexWrap="wrap"
+                overflowX="hidden"
+              />
+            ) : (
+              <Slider
+                media={media}
+                items={activeItem}
+                flexWrap="wrap"
+                overflowX="hidden"
+              />
+            )}
+            <button className="loadMore" onClick={ShowMoreHandler}>
+              Load More
+            </button>
+          </div>
         </PopularComponent>
       ) : (
         <iframe
@@ -224,57 +148,10 @@ const PopularComponent = styled(motion.div)`
   @media screen and (max-width: 1000px) {
     flex-direction: column;
   }
-`;
-const Sorting = styled(motion.div)`
-  width: 20%;
-  text-align:center;
-  @media screen and (max-width: 1000px) {
-    width:100%;
-  }
-  .sortComponent {
-    position:fixed;
-    left:5%;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-    font-size: 3vh;
-    @media screen and (max-width: 1000px) {
-    position:inherit;
-    align-items:center;
-    justify-content:center;
-    font-size:2rem;
-  }
-    select {
-      margin-top: 1rem;
-      padding: 0.5rem 0rem;
-      font-size: 2vh;
-     cursor: pointer;
-      &:focus{
-       outline:none;
-        option{
-          &:checked{
-            background:  #e3ca0b !important;       
-          }
-        }
-      }
-      }
-    }
-  }
-`;
-const Movies = styled(motion.div)`
-  min-height: 70vh;
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  @media screen and (max-width: 1000px) {
-    width: 100%;
-  }
   .loadMore {
-    position: relative;
-    margin-top: 2vh;
-    width: 90%;
+    position: sticky;
+    bottom: 0;
+    width: 80%;
     height: 10vh;
     font-size: 8vh;
     text-transform: upperCase;
@@ -288,6 +165,47 @@ const Movies = styled(motion.div)`
     }
     &:hover {
       background-color: #f7cd43;
+    }
+  }
+`;
+const Sorting = styled(motion.div)`
+  width: 20%;
+  text-align: center;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
+  .title {
+    text-transform: upperCase;
+    font-size: 3vw;
+  }
+  .dd-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+    .dd-header {
+      padding: 0.5vw;
+      border: 1px solid black;
+      transition: 0.5s ease-out;
+      background-color: #f7cd43;
+      cursor: pointer;
+      .dd-header-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .dd-list {
+      flex-direction: column;
+      border: 1px solid black;
+      .dd-list-item {
+        background-color: white;
+        border: none;
+        padding: 0.4vw;
+        cursor: pointer;
+        &:hover {
+          background-color: #f3da8a;
+        }
+      }
     }
   }
 `;
