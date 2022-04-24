@@ -188,7 +188,7 @@ const ArticleLeft = styled(motion.div)`
   }
 `;
 const ArticleRight = styled(motion.div)`
-  width: 15%;
+  width: 17%;
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem;
