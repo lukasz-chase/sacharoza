@@ -81,7 +81,7 @@ const TrailersComponent = styled(motion.div)`
   .trailers {
     display: flex;
     flex-wrap: wrap;
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1250px) {
       flex-direction: column;
     }
     .wrapper {
@@ -94,7 +94,7 @@ const TrailersComponent = styled(motion.div)`
 const VideosComponent = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1250px) {
     flex-direction: column;
   }
   .wrapper {

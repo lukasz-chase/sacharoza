@@ -151,7 +151,7 @@ const PopularComponent = styled(motion.div)`
   .loadMore {
     position: sticky;
     bottom: 0;
-    width: 80%;
+    width: 91%;
     height: 10vh;
     font-size: 8vh;
     text-transform: upperCase;
@@ -160,6 +160,7 @@ const PopularComponent = styled(motion.div)`
     background-color: #f7df7e;
     transition: 0.3s all ease-in;
     @media screen and (max-width: 1000px) {
+      width: 100%;
       font-size: 3vh;
       height: 7vh;
     }

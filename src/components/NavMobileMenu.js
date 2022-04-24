@@ -6,6 +6,12 @@ import { AiOutlineSearch } from "react-icons/ai";
 //router
 import { Link } from "react-router-dom";
 import Toggle from "./Toggle";
+//data
+import {
+  movieCategories,
+  tvShowsCategories,
+  userDropdown,
+} from "../descriptions/dropdownLists";
 
 const NavMobileMenu = ({
   textInput,
@@ -15,6 +21,7 @@ const NavMobileMenu = ({
   menu,
   setMenu,
 }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
   //handlers
   const linkHandler = () => {
     window.scrollTo(0, 0);
@@ -41,50 +48,38 @@ const NavMobileMenu = ({
           </li>
           <li className="header">Movies</li>
           <Toggle state={true}>
-            <li>
-              <Link to="/movies/popular" onClick={() => linkHandler()}>
-                Popular
-              </Link>
-            </li>
-            <li>
-              <Link to="/movies/upcoming" onClick={() => linkHandler()}>
-                Upcoming
-              </Link>
-            </li>
-            <li>
-              <Link to="/movies/top" onClick={() => linkHandler()}>
-                Top Rated
-              </Link>
-            </li>
-            <li>
-              <Link to="/movies/now-playing" onClick={() => linkHandler()}>
-                now playing
-              </Link>
-            </li>
+            {movieCategories.map((category) => (
+              <li key={category.label}>
+                <Link to={category.link} onClick={() => linkHandler()}>
+                  {category.label}
+                </Link>
+              </li>
+            ))}
           </Toggle>
           <li className="header">TV Shows</li>
           <Toggle state={true}>
-            <li className="list-item">
-              <Link to="/tv-series/popular" onClick={() => linkHandler()}>
-                Popular
-              </Link>
-            </li>
-            <li className="list-item">
-              <Link to="/tv-series/today" onClick={() => linkHandler()}>
-                Today in TV
-              </Link>
-            </li>
-            <li className="list-item">
-              <Link to="/tv-series/on-air" onClick={() => linkHandler()}>
-                On the air
-              </Link>
-            </li>
-            <li className="list-item">
-              <Link to="/tv-series/top" onClick={() => linkHandler()}>
-                Top Rated
-              </Link>
-            </li>
+            {tvShowsCategories.map((category) => (
+              <li key={category.label}>
+                <Link to={category.link} onClick={() => linkHandler()}>
+                  {category.label}
+                </Link>
+              </li>
+            ))}
           </Toggle>
+          {user && (
+            <>
+              <li className="header">{user.username}</li>
+              <Toggle state={true}>
+                {userDropdown.map((category) => (
+                  <li key={category.label}>
+                    <Link to={category.link} onClick={() => linkHandler()}>
+                      {category.label}
+                    </Link>
+                  </li>
+                ))}
+              </Toggle>
+            </>
+          )}
         </ul>
       </div>
     </MenuContainer>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import router
 import { useHistory } from "react-router-dom";
 //styled
@@ -8,19 +8,52 @@ import { motion } from "framer-motion";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 //import searchedUrl
-import { getSearchedMovie, getSearchedTv } from "../api";
+import {
+  getSearchedMovie,
+  getSearchedTv,
+  sessionUrl,
+  authentication,
+  getAccount,
+} from "../api";
 //import axios
 import axios from "axios";
 import { Link } from "react-router-dom";
 import NavMobileMenu from "./NavMobileMenu";
+import { useLocation } from "react-router-dom";
+import {
+  movieCategories,
+  tvShowsCategories,
+  userDropdown,
+} from "../descriptions/dropdownLists";
+import Dropdown from "./Dropdown";
 
 const Nav = ({ setSearchedMovie, setSearchedTv }) => {
   //state
   const [textInput, setTextInput] = useState("");
-  const [moviesHover, setMoviesHover] = useState(false);
-  const [tvHover, setTvHover] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [token, setToken] = useState(null);
+  const [session, setSession] = useState("");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const history = useHistory();
+  const location = useLocation();
+  const request_token = location.search?.split("=")[1]?.split("&")[0];
+  //useEffect
+  useEffect(() => {
+    axios.get(authentication()).then((res) => setToken(res.data));
+  }, []);
+  useEffect(() => {
+    if (token && request_token) {
+      axios
+        .get(sessionUrl(request_token))
+        .then((res) => setSession(res.data.session_id));
+      axios.get(getAccount(session)).then((res) => setUser(res.data));
+    }
+  }, [token, request_token, session]);
+  useEffect(() => {
+    if (user && session) {
+      localStorage.setItem("user", JSON.stringify({ ...user, session }));
+    }
+  }, [user, session]);
   //handlers
   const inputHandler = (e) => {
     setTextInput(e.target.value);
@@ -48,68 +81,8 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
       </Link>
       <RightNav>
         <Links>
-          <Dropdown>
-            <div className="header">
-              <div
-                className="title"
-                onMouseEnter={() => setMoviesHover(true)}
-                onMouseLeave={() => setMoviesHover(false)}
-              >
-                Movies{" "}
-              </div>
-            </div>
-            {moviesHover && (
-              <div
-                className="list"
-                onMouseEnter={() => setMoviesHover(true)}
-                onMouseLeave={() => setMoviesHover(false)}
-              >
-                <Link to="/movies/popular" style={{ padding: 0 }}>
-                  <div className="list-item">Popular</div>
-                </Link>
-                <Link to="/movies/upcoming" style={{ padding: 0 }}>
-                  <div className="list-item">Upcoming</div>
-                </Link>
-                <Link to="/movies/top" style={{ padding: 0 }}>
-                  <div className="list-item">Top Rated</div>
-                </Link>
-                <Link to="/movies/now-playing" style={{ padding: 0 }}>
-                  <div className="list-item">now playing</div>
-                </Link>
-              </div>
-            )}
-          </Dropdown>
-          <Dropdown>
-            <div className="header">
-              <div
-                className="title"
-                onMouseEnter={() => setTvHover(true)}
-                onMouseLeave={() => setTvHover(false)}
-              >
-                TV Shows{" "}
-              </div>
-            </div>
-            {tvHover && (
-              <div
-                className="list"
-                onMouseEnter={() => setTvHover(true)}
-                onMouseLeave={() => setTvHover(false)}
-              >
-                <Link to="/tv-series/popular" style={{ padding: 0 }}>
-                  <div className="list-item">Popular</div>
-                </Link>
-                <Link to="/tv-series/today" style={{ padding: 0 }}>
-                  <div className="list-item">Today in TV</div>
-                </Link>
-                <Link to="/tv-series/on-air" style={{ padding: 0 }}>
-                  <div className="list-item">On the air</div>
-                </Link>
-                <Link to="/tv-series/top" style={{ padding: 0 }}>
-                  <div className="list-item">Top Rated</div>
-                </Link>
-              </div>
-            )}
-          </Dropdown>
+          <Dropdown title="Movies" list={movieCategories} />
+          <Dropdown title="Tv Shows" list={tvShowsCategories} />
         </Links>
         <form>
           <input
@@ -124,6 +97,14 @@ const Nav = ({ setSearchedMovie, setSearchedTv }) => {
             <AiOutlineSearch />
           </button>
         </form>
+        {!user && (
+          <a
+            href={`https://www.themoviedb.org/authenticate/${token?.request_token}?redirect_to=http://localhost:3000/`}
+          >
+            sign in
+          </a>
+        )}
+        {user && <Dropdown title={user.username} list={userDropdown} />}
       </RightNav>
       <div className="menu-icon" onClick={() => setMenu(!menu)}>
         {menu ? <AiOutlineClose /> : <GiHamburgerMenu />}
@@ -196,26 +177,6 @@ const RightNav = styled(motion.div)`
       border: none;
       top: 0;
       font-size: 1.5rem;
-    }
-  }
-`;
-const Dropdown = styled(motion.div)`
-  padding: 0rem 3rem;
-  .list {
-    position: absolute;
-    background-color: white;
-    padding-top: 1rem;
-    border-radius: 0.5rem;
-    .list-item {
-      display: flex;
-      height: 2rem;
-      min-width: 12rem;
-      padding: 1.2rem;
-      align-items: center;
-      color: black;
-      &:hover {
-        background-color: rgb(152, 152, 152, 0.3);
-      }
     }
   }
 `;

@@ -109,7 +109,7 @@ const Home = () => {
           </button>
         </ButtonsStyle>
       </ColumnHeader>
-      <Slider items={trendingTv} />
+      <Slider media="tv" items={trendingTv} />
     </StyledHome>
   );
 };

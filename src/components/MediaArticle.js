@@ -144,7 +144,7 @@ const MediaArticle = ({
 };
 const ArticleComponent = styled(motion.div)`
   display: flex;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1250px) {
     flex-direction: column;
   }
   h1 {
@@ -163,13 +163,13 @@ const ArticleLeft = styled(motion.div)`
   overflow-y: hidden;
   margin-left: 1rem;
   margin-top: 5rem;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1250px) {
     height: 15rem;
     width: 95%;
   }
   .cast {
     display: flex;
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1250px) {
       height: 20rem;
     }
   }
@@ -181,7 +181,7 @@ const ArticleLeft = styled(motion.div)`
     &:hover {
       cursor: pointer;
     }
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1250px) {
       font-size: 5rem;
       margin-bottom: 6rem;
     }
@@ -192,7 +192,7 @@ const ArticleRight = styled(motion.div)`
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1250px) {
     padding: 1rem 1rem;
     width: 100%;
     flex-direction: row;
@@ -209,14 +209,14 @@ const Cast = styled(motion.div)`
   transition: 0.5s ease-in;
   margin-right: 1rem;
   margin-top: 1rem;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1250px) {
     margin-top: 0;
     width: 10vh;
     height: 16rem;
   }
   p {
     color: black;
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1250px) {
       font-size: 0.8rem;
       min-height: 6%;
     }
@@ -224,7 +224,7 @@ const Cast = styled(motion.div)`
   img {
     width: 20vh;
     object-fit: cover;
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1250px) {
       width: 10vh;
     }
   }
@@ -243,20 +243,20 @@ const SocialMedia = styled(motion.div)`
 `;
 const Item = styled(motion.div)`
   padding: 1rem 0rem;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1250px) {
     padding: 0.5rem;
   }
   p {
     font-size: 2rem;
     font-weight: bold;
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1250px) {
       font-size: 1.5rem;
     }
   }
   .value {
     font-weight: lighter;
     font-size: 1.5rem;
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1250px) {
       font-size: 1rem;
     }
   }
@@ -266,7 +266,7 @@ const Item = styled(motion.div)`
     width: 7rem;
     height: 3rem;
     object-fit: contain;
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1250px) {
       width: 4rem;
       height: 2rem;
     }

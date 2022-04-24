@@ -15,7 +15,7 @@ import UpcomingMovies from "./pages/UpcomingMovies";
 import OnAir from "./pages/OnAir";
 import NowPlayingMovies from "./pages/NowPlayingMovies";
 import Today from "./pages/Today";
-
+import Account from "./pages/Account";
 //Styles
 import GlobalStyles from "./components/GlobalStyles";
 //Router
@@ -64,6 +64,9 @@ function App() {
       </Route>
       <Route path="/tv-series/today" exact>
         <Today />
+      </Route>
+      <Route path="/profile" exact>
+        <Account />
       </Route>
       <Footer />
     </div>

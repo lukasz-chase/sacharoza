@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
 
@@ -13,18 +12,17 @@ const Slider = ({
   return (
     <StyledSlider style={{ flexWrap, overflowX }}>
       {items?.map((item) => (
-        <Link
-          to={`/${media}/${item.id}`}
-          key={item.id}
-          style={{ textDecoration: "none" }}
-          onClick={() => window.scrollTo(0, 0)}
-        >
+        <div key={item.id}>
           <Card
-            movieTitle={item.name}
+            title={
+              item.original_title ? item.original_title : item.original_name
+            }
             key={item.id}
+            id={item.id}
             movieImage={item.poster_path}
+            media={media}
           />
-        </Link>
+        </div>
       ))}
     </StyledSlider>
   );

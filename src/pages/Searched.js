@@ -68,9 +68,10 @@ const ResultContainer = styled(motion.div)`
 `;
 const ButtonComp = styled(motion.div)`
   text-align: center;
+  justify-content: center;
   height: 5vh;
   width: 25vh;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-radius: 1rem;
   padding: 5px;
   border: 1px solid black;
