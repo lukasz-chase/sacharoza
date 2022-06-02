@@ -1,4 +1,4 @@
-you can check it live on: https://saharoza.vercel.app/
+you can check it live on: https://sacharoza.netlify.app/
 
 To run this app on your computer follow these steps:
 
